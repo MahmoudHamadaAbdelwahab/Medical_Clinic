@@ -1,0 +1,35 @@
+/* start BlogPost*/
+.textBlogPost {
+    background-image: url("../../../imag/services/header.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+
+.BlogPost .textBlogPost h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.BlogPost .cart{
+    padding: 5px;
+    border: 1px solid black;
+}
+.BlogPost .cart img{
+    width: 100%;
+}
+.BlogPost .cartText h4{
+    font-size: 12px;
+}
+.BlogPost .cartText button{
+    padding: 5px;
+    background-color: rgb(17, 17, 137);
+}
+.BlogPost .cart a{
+    color:hotpink;
+    text-decoration: none;
+}
+/* end BlogPost*/

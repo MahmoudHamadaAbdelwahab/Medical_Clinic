@@ -1,0 +1,15 @@
+/* start navbar */
+.navbar{
+    padding: 5px;
+}
+.navbar ul{
+    list-style-type:none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* end navbar */
+/* start servicePage */
+
+/* end servicePage */

@@ -1,0 +1,31 @@
+/* start our doctors*/
+.textOurDoc{
+    background-image: url("../../../imag/services/header.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.textOurDoc h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.OurDoctors .CartText h3{
+   font-size: 30px;
+}
+.OurDoctors .CartText p{
+   font-size: 16px;
+}
+.SpecialDoc .text-SpecialDoc{
+    background-color: aliceblue;
+    padding: 5px;
+    color: black;
+}
+.SpecialDoc img{
+    width: 100%;
+    height: 200px;
+}
+/* end our doctors*/

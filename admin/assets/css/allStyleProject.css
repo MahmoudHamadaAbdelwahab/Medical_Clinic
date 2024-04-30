@@ -1,0 +1,294 @@
+/* start navbar */
+.navbar{
+    padding: 5px;
+}
+.navbar ul{
+    list-style-type:none;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+/* end navbar */
+
+/*start contact us*/
+.ContactUS .textCart{
+    background-image: url("./img//services/close-up-revealing-shot-medical-dentistry-display-with-teeth-diagnosis-xray-images-it-empty-profe.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.ContactUS .textCart h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+/*end contact us*/
+
+/*start bookingDates*/
+
+.bookingDates .cartItem{
+    margin: 30px;
+}
+.parent{
+    background-color: #0d6efd;
+    padding: 20px;
+}
+.parent i{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+/*end bookingDates*/
+
+/* start service */
+.textCart{
+    background-image: url("./img//services/close-up-revealing-shot-medical-dentistry-display-with-teeth-diagnosis-xray-images-it-empty-profe.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.textCart h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.cartIcon{
+    border: 1px solid black;
+    padding: 10px;
+    width: 300px;
+   height : 300px;
+}
+.cartIcon img{
+    width: 170px;
+}
+/*end service*/
+
+/* start slider */
+.slider{
+    background-image: url('./img/gallery/hero-bg.png');
+    background-size: cover;
+    height: 100%;
+}
+
+.slider .slider-title{
+    color: #0d6efd;
+    font-weight: bold;
+    font-size: 30px;
+};
+.slider .slider-text{
+    font-size: 16px;
+}
+.slider .cart button{
+    border-radius: 15px;
+};
+/* end slider */
+
+/* start department */
+.department{
+    display: flex;
+    flex-wrap: wrap;
+}
+.department .cart h4{
+    font-size: 12px;
+    font-weight: bold;
+}
+/* end department */
+
+/* start about  */
+.about .text{
+    margin-top: 50px;
+}
+.about .text h3{ 
+    color:#0d6efd;
+}
+.about .text p{ 
+  font-size: 16px;
+}
+/* end about  */
+
+/* start CardDoc*/
+.cardDoc .card{
+display: flex;
+justify-content: center;
+flex-direction: row;
+gap: 5px;
+}
+
+.card img{
+    width: 80px;
+    margin-left: 2%;
+}
+.card .text{
+    width: 250px;
+    cursor: pointer;
+}
+.card .text h3:hover{
+    color: #0d6efd;
+}
+.card .text button:hover{
+    background-color: #0d6efd;
+}
+.cardDoc .findDoc{
+background-image: url("/src/img/gallery/teamDoc2.jpg");
+background-size: cover;
+width: 50%;
+height: 300px;
+padding: 5px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+}
+
+.cardDoc .recentBlog{
+background-image: url("/src/img/gallery/nicotine.png");
+background-size: cover;
+width: 50%;
+height: 300px;
+padding: 5px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+}
+
+/* end CardDoc */
+
+/* start our doctors*/
+.OurDoctors{
+    background-color: rgb(37, 37, 37);
+    color: antiquewhite;
+}
+.OurDoctors .textOurDoc{
+    background-image: url("./img//services/close-up-revealing-shot-medical-dentistry-display-with-teeth-diagnosis-xray-images-it-empty-profe.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.textOurDoc h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.OurDoctors .CartText h3{
+   font-size: 30px;
+}
+.OurDoctors .CartText p{
+   font-size: 16px;
+}
+.SpecialDoc .text-SpecialDoc{
+    background-color: aliceblue;
+    padding: 5px;
+    color: black;
+}
+.SpecialDoc img{
+    width: 100%;
+    height: 200px;
+}
+/* end our doctors*/
+
+/* start SpecialtyDoctors*/
+.specialtyDoc{
+    background-color:aliceblue;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    color: black;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+/* end SpecialtyDoctors*/
+
+/*start appointment*/
+.appointment{
+    background-image: url('./img//gallery/appointment-bg.png');
+    background-size:cover;
+}
+.appointCart{
+    padding: 10px;
+    display: flex;
+}
+/* end appointment*/
+
+/* start BlogPost*/
+.BlogPost .textBlogPost {
+    background-image: url("./img//services/close-up-revealing-shot-medical-dentistry-display-with-teeth-diagnosis-xray-images-it-empty-profe.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.BlogPost .textBlogPost h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.BlogPost .cart{
+    padding: 5px;
+    border: 1px solid black;
+}
+.BlogPost .cart img{
+    width: 100%;
+}
+.BlogPost .cartText h4{
+    font-size: 12px;
+}
+.BlogPost .cartText button{
+    padding: 5px;
+    background-color: rgb(17, 17, 137);
+}
+.BlogPost .cart a{
+    color:hotpink;
+    text-decoration: none;
+}
+/* end BlogPost*/
+
+/*start LiveDoc*/
+.LiveDoc{
+    background-image: url('./img/gallery/people-bg-1.png');
+    background-size: cover;
+    height: 100%;
+    cursor:pointer;
+}
+.LiveDoc h3{
+    color:#0d6efd;
+}
+.LiveDoc .LiveDocCart{
+    display: flex;
+    flex-direction: column;
+}
+
+.LiveDoc .LiveDocCart h5{
+    font-size: 16px;
+}
+/*end LiveDoc*/
+
+/*start specialtyCard*/
+.specialtyCard{
+    background-image: url("./img//gallery//hospital1.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.specialtyCard h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+/*end specialtyCard*/
+
