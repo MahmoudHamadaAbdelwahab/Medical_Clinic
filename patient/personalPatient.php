@@ -1,15 +1,18 @@
 <?php
-require_once('../config.php');
-session_start(); // Start PHP session
+    require_once('../config.php');
+    require_once BLA.'inc/nav.php';
+    require_once BL.'functions/valid.php';
+    require_once BL.'functions/db.php';
+    ?>
 
-// Check if user is not logged in, redirect to login page
-// if (!isset($_SESSION['patient_user'])) {
-//     header("Location:".BURLA."authentication/login.php");
-//     exit();
-// }
+<?php
+    if(!$conn){
+        dir('Error' . mysqli_connect_error());
+    }
 
-// Get the username from the session
-$username = $_SESSION['patient_user'];
+    $sql = "SELECT * FROM patient";
+    $query = mysqli_query($conn , $sql);
+    $result = mysqli_fetch_assoc($query);
 ?>
 
 <!DOCTYPE html>
@@ -17,20 +20,21 @@ $username = $_SESSION['patient_user'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
 </head>
 <body>
     <nav>
         <ul>
-            <li>Welcome, <?php echo $username; ?></li>
+            <li>Welcome, <?php echo $result['patient_name']; ?></li>
             <li><a href="personal_page.php">Personal Page</a></li>
             <li><a href="signup.php">Sign Up</a></li>
             <li><a href="logout.php">Logout</a></li>
         </ul>
     </nav>
     <div class="container">
-        <h1>Welcome, <?php echo $username; ?>!</h1>
+        <h1>Welcome, <?php echo $result['patient_name']; ?>!</h1>
         <!-- Your personalized content here -->
     </div>
 </body>
 </html>
+
+<?php require_once BLA.'inc/footer.php';?>

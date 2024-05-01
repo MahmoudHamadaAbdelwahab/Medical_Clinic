@@ -3,7 +3,6 @@
     require_once BLA.'inc/nav.php';
     require_once BL.'functions/valid.php';
 ?>
-
     <!DOCTYPE html>
     <html lang="en">
         <head>
@@ -32,7 +31,6 @@
             </style>
         </head>
         <body>
-
             <div class="slider text-center">
                 <div class="container">
                     <div class="row d-flex justify-content-center align-items-center text-center">
@@ -55,7 +53,7 @@
             </div>
         </body>
     </html>
-
+    <h1 class="text-center">Medical departments</h1>
     <?php include('../services/servicePage.php')?>
 
 <?php require_once BLA.'inc/footer.php';?>

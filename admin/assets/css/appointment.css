@@ -1,0 +1,10 @@
+/*start appointment*/
+.appointment{
+    background-image: url('../../../imag/gallery/appointment-bg.png');
+    background-size:cover;
+}
+.appointCart{
+    padding: 10px;
+    display: flex;
+}
+/* end appointment*/

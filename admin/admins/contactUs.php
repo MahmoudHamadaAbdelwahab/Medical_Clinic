@@ -2,6 +2,21 @@
     require_once('../../config.php');
     require_once BLA.'inc/nav.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/countactUS.css">
+
+</head>
+<body>
+<div class="ContactUS">
+    <div class="textCart">
+        <h4>Contact US</h4>
+    </div>
+
     <!-- BookingDates -->
     <div class='bookingDates'>
         <div class='cartItem d-flex justify-content-center gap-2'>
@@ -37,6 +52,11 @@
     </div>
     <!-- Appointment -->
     <?php include('./appointment.php');?>
+    
+</div>
+        
+    </body>
+</html>
 
 <?php
     require_once BLA.'inc/footer.php';

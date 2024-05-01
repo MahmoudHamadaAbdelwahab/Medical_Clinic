@@ -3,13 +3,14 @@
     require_once BL.'functions/valid.php';
     require_once BLA.'inc/nav.php';
     require_once BL.'functions/messages.php';
+    require_once BL."functions/db.php";
 
     // Check if user is already logged in, redirect to personal page if so
     // session_start(); // Start PHP session
-    if(isset($_SESSION['patient_name'])){
-        header('Location:../../page/homePage.php');
-        exit();
-    }
+    // if(isset($_SESSION['patient_name'])){
+    //     header('Location:../../page/homePage.php');
+    //     exit();
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +73,6 @@ button[type="submit"]:hover {
 <body>
 
 <?php
-    require_once BL."functions/db.php";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST['email'];

@@ -1,0 +1,32 @@
+/*start contact us*/
+.ContactUS .textCart{
+    background-image: url("../../../imag/services/header.jpg");
+    background-size:cover;
+    padding: 20px;
+    height: 300px;
+}
+.ContactUS .textCart h4{
+    color: aliceblue;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.ContactUS .bookingDates .cartItem{
+    margin: 30px;
+}
+.ContactUS .parent{
+    background-color: #0d6efd;
+    padding: 20px;
+}
+.ContactUS .parent i{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+
+/*end contact us*/

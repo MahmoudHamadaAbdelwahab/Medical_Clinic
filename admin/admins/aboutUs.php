@@ -2,11 +2,23 @@
     require_once('../../config.php');
     require_once BLA.'inc/nav.php';
 ?>
-    <link rel="stylesheet" href="../admin/assets/css/service.css">
+    <!-- <link rel="stylesheet" href="../admin/assets/css/about.css"> -->
     <!-- Your HTML content goes here -->
-    <div class='about text-center mt-5' >
-            <h3>About Us</h3>
-        <div class='container'> 
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../assets/css/aboutUs.css">
+    </head>
+    <body>
+
+    <div class='about' >
+        <div class="textCart">
+            <h4>About Us</h4>
+        </div>
+        <div class='container mt-2'> 
             <div class='row'>
                  <div class='col-lg-7'>
                     <img src="<?php echo BURL.'imag/gallery/health-care.png'?>" class="img-fluid mb-2"/>
@@ -25,6 +37,7 @@
         </div>
     </div>
 
-<?php
-    require_once BLA.'inc/footer.php';
-?>
+    </body>
+    </html>
+
+ <?php require_once BLA.'inc/footer.php';?>

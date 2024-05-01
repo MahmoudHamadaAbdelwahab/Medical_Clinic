@@ -1,23 +1,22 @@
     <?php
-        require_once('../config.php');
-        require_once BLA.'inc/nav.php';
-        require_once BL.'functions/valid.php';
+    require_once('../config.php');
+    require_once BLA.'inc/nav.php';
+    require_once BL.'functions/valid.php';
     ?>
 
     <?php
-        $hostname = 'localhost';
-        $username = 'root';
-        $password = '';
-        $database_name = 'medical_clinic';
+    $hostname = 'localhost';
+    $username = 'root';
+    $password = '';
+    $database_name = 'medical_clinic';
 
-        try {
-            $pdo = new PDO("mysql:host=$hostname;dbname=$database_name", $username, $password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Error: " . $e->getMessage());
-        }
+    try {
+        $pdo = new PDO("mysql:host=$hostname;dbname=$database_name", $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch (PDOException $e) {
+        die("Error: " . $e->getMessage());
+    }
     ?>
-
     
 <!DOCTYPE html>
 <html lang="en">
@@ -26,25 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../admin/assets/css/ourDoctors.css">
   <!-- start style payment  -->
-  <style>
-        .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
-        }
-        .modal-content {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        }
-  </style>
+
     <!-- end style payment -->
 </head>
 <body>
@@ -74,36 +55,14 @@
                                             // Display each row as a card
                                             echo "<div class='card'>";
                                             echo '<img src="data:image/jpe/g;base64,'.base64_encode($row['doctorImage']) . '" />';
-                                            echo "<h4>{$row['doctorName']}</h4>";
-                                            echo "<p>Specialty: {$row['doctorIsSpecialty']}</p>";
-                                            echo "<p>Date: {$row['doctorDate']}</p>";
-                                            echo "<p>Phone: {$row['doctorPhone']}</p>";
-                                            echo "<p>Booking price : {$row['doctorSallary']}</p>";
+                                            echo "<h4 >{$row['doctorName']}</h4>";
+                                            echo "<p >Specialty: {$row['doctorIsSpecialty']}</p>";
+                                            echo "<p >Date: {$row['doctorDate']}</p>";
+                                            echo "<p >Phone: {$row['doctorPhone']}</p>";
+                                            echo "<p >Booking price : {$row['doctorSallary']}</p>";
                                             // Button to open the payment popup
                                             echo '<button onclick="showPaymentPopup()">Booking</button>'; // Booking button
                                             echo "</div>";
-
-;                                             // Payment Popup 
-                                            echo'<div id="paymentModal" class="modal">';
-                                              echo'<div class="modal-content">';
-                                                // Payment form 
-                                                echo'<form action="process_payment.php" method="POST">';
-                                                  echo'<label for="name">Name:</label>';
-                                                  echo'<input type="text" id="name" name="name" required><br><br>';
-                                                  echo'<label for="email">Email:</label>';
-                                                  echo'<input type="email" id="email" name="email" required><br><br>';
-                                                  echo'<label for="cardNumber">Card Number:</label>';
-                                                  echo'<input type="text" id="cardNumber" name="cardNumber" required><br><br>';
-                                                  echo'<label for="expiry">Expiry Date:</label>';
-                                                  echo'<input type="text" id="expiry" name="expiry" placeholder="MM/YY" required><br><br>';
-                                                  echo'<label for="cvv">CVV:</label>';
-                                                  echo'<input type="text" id="cvv" name="cvv" required><br><br>';
-                                                  echo'<button type="submit">Pay Now</button>';
-                                                echo'</form>';
-                                                // Close button for the popup 
-                                                echo'<button onclick="hidePaymentPopup()">Close</button>';
-                                             echo'</div>';
-                                           echo'</div>';
                                         }
                                     } catch (PDOException $e) {
                                         echo "Error: " . $e->getMessage();
@@ -120,35 +79,8 @@
                 </div>
         </div>
 </div>
-
-
-  <!-- JavaScript for showing/hiding the payment popup -->
-  <script>
-    function showPaymentPopup() {
-      var modal = document.getElementById('paymentModal');
-      modal.style.display = 'flex';
-    }
-
-    function hidePaymentPopup() {
-      var modal = document.getElementById('paymentModal');
-      modal.style.display = 'none';
-    }
-  </script>
-    </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 <?php require_once BLA.'inc/footer.php';?>
 

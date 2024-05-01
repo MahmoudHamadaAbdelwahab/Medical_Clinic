@@ -1,38 +1,27 @@
 <?php
     require_once('../../config.php');
-    require_once BLA.'inc/header.php';
+    // if(isset($_SESSION['patient_name'])){
+    //     session_destroy();
+    //     header('location:'.BURLA.'authentication/login.php');
+    // }else{
+    //     header('location:'.BURL.'page/homePage.php');
+    //     exit; // Make sure to exit after redirection
+    // }
+  
+    // Start the session (if not already started)
+    session_start();
 
-    if(isset($_SESSION['admin_name'])){
-        session_destroy();
-        header('location:'.BURL_AUTH.'login.php');
-    }else{
-        header('location:'.BURL_AUTH);
-    }
+    // Unset all session variables
+    $_SESSION = array();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page or any other desired page
+    header('location:'.BURL.'page/homePage.php');
+    exit; // Make sure to exit after redirection
+
 ?>
-
-<?php
-    echo 'logout php';
-?>
-
 <?php
     require_once BLA.'inc/footer.php';
 ?>
-
-
-<!-- Logout Script (logout.php)  -->
- <?php
-// session_start(); // Start PHP session
-
-// // Unset all session variables
-// $_SESSION = array();
-
-// // Destroy the session
-// session_destroy();
-
-// // Redirect to login page
-// header("Location: homePage.php");
-// exit();
-?> 
-
-
-
