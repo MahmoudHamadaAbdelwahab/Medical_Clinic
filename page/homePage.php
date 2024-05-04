@@ -14,6 +14,7 @@
                     background-image: url('../imag/gallery/hero-bg.png');
                     background-size: cover;
                     height: 100%;
+                    text-align: center;
                 }
 
                 .slider .slider-title{
@@ -24,8 +25,11 @@
                 .slider .slider-text{
                     font-size: 16px;
                 }
-                .slider .cart button{
-                    border-radius: 15px;
+                .slider .cart .click a{
+                    text-decoration: none;
+                    font-size: 20px;
+                    font-weight:bold; 
+                    color: black
                 };
                 /* end slider */
             </style>
@@ -44,16 +48,18 @@
                         <div class="cart col-sm-7 col-lg-6">
                             <h3 class="slider-title">We're determined for your better life.</h3>
                             <p class="slider-text"> There is a big discount Up to 50% discount on your purchase</p>
-                        <Link to="/contactUs">
-                            <button>make an appointment </button>
-                        </Link>
+                            <button class="click">
+                                <a href="../admin/admins/contactUs.php">make an appointment</a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </body>
     </html>
-    <h1 class="text-center">Medical departments</h1>
-    <?php include('../services/servicePage.php')?>
-
-<?php require_once BLA.'inc/footer.php';?>
+    <!-- department page -->
+    <?php include('../doctor/department.php')?>
+    <!-- links Medical page -->
+    <?php include('../admin/admins/linksMedical.php')?>
+    <!-- footer -->
+    <?php require_once BLA.'inc/footer.php';?>

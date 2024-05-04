@@ -3,16 +3,9 @@
     require_once BLA.'inc/nav.php';
     require_once BL.'functions/valid.php';
     require_once BL.'functions/db.php';
-    ?>
 
-<?php
-    if(!$conn){
-        dir('Error' . mysqli_connect_error());
-    }
-
-    $sql = "SELECT * FROM patient";
-    $query = mysqli_query($conn , $sql);
-    $result = mysqli_fetch_assoc($query);
+    $patient = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'patient' ? $_SESSION['patient_name'] : null;
+    $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -22,17 +15,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li>Welcome, <?php echo $result['patient_name']; ?></li>
-            <li><a href="personal_page.php">Personal Page</a></li>
-            <li><a href="signup.php">Sign Up</a></li>
-            <li><a href="logout.php">Logout</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <h1>Welcome, <?php echo $result['patient_name']; ?>!</h1>
-        <!-- Your personalized content here -->
+    <div class="container text-center">
+        <div class="col-sm-12">
+        <?php if(isset($_SESSION['patient_name'])): ?>
+        
+            <h3 class="p-3 bg-primary text-white">
+                Welcome <?php echo $_SESSION['patient_name']; ?> , reservation
+            </h3>
+
+            <?php if ($_SESSION['doctorName']): ?>
+                <table class="table table-dark table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <td scope="col">doctor name</td>
+                            <td scope="col">doctor is specialty</td>
+                            <td scope="col">doctor phone</td>
+                            <td scope="col">reservation date</td>
+                            <td scope="col">reservation price</td>
+                            <td scope="col">action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center">
+                            <td scope="row"> <?php echo $_SESSION['doctorName']?></td>
+                            <td scope="row"><?php echo $_SESSION['doctorIsSpecialty']?></td>
+                            <td class="text-center"><?php echo $_SESSION['doctorPhone']?></td>
+                            <td class="text-center"><?php echo $_SESSION['doctorDate']?></td>
+                            <td class="text-center"><?php echo $_SESSION['doctorSallary']?></td>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-info">Edit</a>
+                                <a href="#" class="btn btn-danger delete" data-field="city_id" data_id="<?php echo $row["city_id"];?>" data-table="city">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody> 
+                </table>
+                <?php else: ?> 
+                    <h3>not found any doctor</h3>
+                <?php endif?>
+        
+
+        <?php else: ?> 
+            <h3>not found any patient</h3>
+        <?php endif?>
+
+
+        </div>
     </div>
 </body>
 </html>

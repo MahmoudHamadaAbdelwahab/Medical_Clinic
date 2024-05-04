@@ -1,14 +1,9 @@
-<?php 
-    require_once('../../config.php');
-    require_once BLA.'inc/nav.php';
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../assets/css/appointment.css">
+    <link rel="stylesheet" href="../assets/css/appointment.css">
 </head>
 <body>
 
@@ -44,4 +39,3 @@
 </body>
 </html>
 
-<?php require_once BLA.'inc/footer.php';?>

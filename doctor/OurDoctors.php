@@ -2,8 +2,9 @@
     require_once('../config.php');
     require_once BLA.'inc/nav.php';
     require_once BL.'functions/valid.php';
+    require_once BL.'functions/db.php';
     ?>
-
+    <!-- show doctor data -->
     <?php
     $hostname = 'localhost';
     $username = 'root';
@@ -16,17 +17,37 @@
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
+    // Include your database connection or any necessary files here
+    // Assuming $pdo is your PDO connection object
+
+    if (isset($_GET['docId'])) {
+        $doctorId = $_GET['docId'];
+
+        // Query to fetch doctor's data based on doctorId
+        $stmt = $pdo->prepare("SELECT * FROM doctor WHERE doctorId = ?");
+        $stmt->execute([$doctorId]);
+        $doctorData = $stmt->fetch(PDO::FETCH_ASSOC);
+        // Display the doctor's data
+        if ($doctorData) {
+            $_SESSION['doctorName'] = $doctorData['doctorName'];
+            $_SESSION['doctorIsSpecialty'] = $doctorData['doctorIsSpecialty'];
+            $_SESSION['doctorDate'] = $doctorData['doctorDate'];
+            $_SESSION['doctorPhone'] = $doctorData['doctorPhone'];
+            $_SESSION['doctorSallary'] = $doctorData['doctorSallary'];
+        } else {
+            echo "Doctor not found.";
+        }
+    } else {
+        
+    }
     ?>
-    
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../admin/assets/css/ourDoctors.css">
-  <!-- start style payment  -->
-
-    <!-- end style payment -->
 </head>
 <body>
     
@@ -41,7 +62,7 @@
                 </div>
                 <div class='d-flex justify-content-center gap-5'>
                         <!-- get data from backend api --> 
-                    <div class='SpecialDoc col-sm-9 col-md-9 col-lg-9'>
+                    <div class='SpecialDoc col-sm-12 col-md-12 col-lg-12'>
                         <div class='text-SpecialDoc'>
                             <h3>Our new doctors</h3>
                         </div>
@@ -53,16 +74,22 @@
                                         $stmt = $pdo->query("SELECT * FROM doctor");
                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                             // Display each row as a card
-                                            echo "<div class='card'>";
-                                            echo '<img src="data:image/jpe/g;base64,'.base64_encode($row['doctorImage']) . '" />';
-                                            echo "<h4 >{$row['doctorName']}</h4>";
-                                            echo "<p >Specialty: {$row['doctorIsSpecialty']}</p>";
-                                            echo "<p >Date: {$row['doctorDate']}</p>";
-                                            echo "<p >Phone: {$row['doctorPhone']}</p>";
-                                            echo "<p >Booking price : {$row['doctorSallary']}</p>";
-                                            // Button to open the payment popup
-                                            echo '<button onclick="showPaymentPopup()">Booking</button>'; // Booking button
-                                            echo "</div>";
+                                                echo "<div class='card'";
+                                                    echo '<img src="data:image/jpe/g;base64,'.base64_encode($row['doctorImage']) . '" />';
+                                                    echo "<h4>{$row['doctorName']}</h4>";
+                                                    echo "<p>Specialty: {$row['doctorIsSpecialty']}</p>";
+                                                    echo "<p>Date: {$row['doctorDate']}</p>";
+                                                    echo "<p>Phone: {$row['doctorPhone']}</p>";
+                                                    echo "<p>Booking price : {$row['doctorSallary']}</p>";
+                                                    // echo '<form action="" method="POST">';
+                                                    // echo '<input type="hidden" name="docId" value="'.$row['doctorId'].'">';
+                                                    // echo '<button type="submit" name="booking" onClick=(getData())>Booking</button>';
+                                                    // echo '</form>';
+                                                    echo '<form action="" method="GET">'; // Using GET method to pass data via URL
+                                                        echo '<input type="hidden" name="docId" value="'.$row['doctorId'].'">';
+                                                        echo '<button type="submit" name="booking">Booking</button>';
+                                                    echo '</form>';
+                                                echo "</div>";
                                         }
                                     } catch (PDOException $e) {
                                         echo "Error: " . $e->getMessage();
@@ -71,16 +98,12 @@
                                  <!-- ent this code chat gpt  -->
                         </div>
                     </div>
-                    <div class='col-sm-3 col-md-3 col-lg-3'>
-                         <?php 
-                        include('./SpecialtyDoctors.php');
-                        ?> 
-                    </div>
                 </div>
         </div>
 </div>
+    <!-- code js -->
+    <script>
+    </script>
 </body>
 </html>
-
 <?php require_once BLA.'inc/footer.php';?>
-

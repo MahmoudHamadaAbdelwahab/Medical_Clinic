@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../assets/css/countactUS.css">
 
+</style>
 </head>
 <body>
 <div class="ContactUS">
@@ -50,14 +51,11 @@
             </div>
         </div>
     </div>
-    <!-- Appointment -->
+    <!-- appointment -->
     <?php include('./appointment.php');?>
     
 </div>
-        
     </body>
 </html>
 
-<?php
-    require_once BLA.'inc/footer.php';
-?>
+<?php require_once BLA.'inc/footer.php'; ?>

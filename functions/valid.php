@@ -5,7 +5,7 @@
         }
         return true;
     }; 
-    // not min 3 character 
+        // not min 3 character 
     function checkLies($value,$min){
         // He does not count numbers as letters
         if(trim(strlen($value)) <= $min){
