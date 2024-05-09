@@ -29,12 +29,6 @@
         display: flex;
         flex-wrap: wrap;
         }
-        .text{
-            margin-bottom: .5rem;
-            font-weight: 500;
-            line-height: 1.2;
-        }
-
         .department .cart h4{
             font-size: 12px;
             font-weight: bold;

@@ -1,24 +1,47 @@
+
 <?php
-    // Include necessary files
     require_once('../../config.php');
     require_once BL.'functions/db.php';
     require_once BL.'functions/messages.php';
     require_once BL.'functions/valid.php';
     require_once BLA.'inc/nav.php';
-    
-    // Check if user is already logged in, redirect to home page
-    if(isset($_SESSION['patient_name'])){
-        header('location:'.BL.'page/homePage.php');
-        exit(); // Make sure to stop script execution after redirection
-    }
-?>
 
+    // When form submitted, check and create user session.
+    if (isset($_POST['username'])) {
+        $username = stripslashes($_REQUEST['username']);// removes backslashes
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = stripslashes($_REQUEST['password']);
+        $password = mysqli_real_escape_string($conn, $password);
+        
+        // Check user is exist in the database
+        $query = "SELECT * FROM patient WHERE patient_name = '$username' AND patient_password = '$password'";
+        $result = mysqli_query($conn, $query);
+        $rows = mysqli_num_rows($result);
+        if ($rows == 1) {
+                $user = mysqli_fetch_assoc($result);
+                // Login successful, set session variables
+                $_SESSION['PatientId'] = $user['PatientId'];
+                $_SESSION['patient_name'] = $user['patient_name'];
+                $_SESSION['patient_role'] = $user['patient_role'];
+
+                $delay = 1;  // Delay in seconds before refreshing the page
+                header("Refresh: $delay"); // Redirect to the current page after the specified delay
+                echo "<div class='form_success'>
+                         <h3> successfully login </h3><br/>
+                     </div>";
+        } else {
+            echo "<div class='form_error'>
+                    <h3>Incorrect Username or password.</h3><br/>
+                 </div>";
+                }
+    }else{
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../assets/css/login.css">
+    <meta charset="utf-8"/>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css"/>
 
 <style>
 .login-container {
@@ -66,51 +89,36 @@ input[type="password"] {
     background-color: #0d6efd;
     color: white;
   }
-</style> 
+
+  .form_success ,
+   .form_error{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 30%;
+        text-align: center;
+    }
+    
+    .form_success .link a,
+    .form_error .link a{
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 </head>
 <body>
 
-<?php
-    if(isset($_POST['login'])){
-        $email = $_POST['email'];
-        $pass = $_POST['password'];
-        if(checkEmpty($email) && checkEmpty($pass)){
-            if(validEmail($email)){
-                $check = getRow('patient', 'patient_email', $email);
-                if($check){
-                    $check_password = password_verify($pass, $check['patient_password']);
-                    if($check_password){
-                        $_SESSION['patient_name'] = $check['patient_name'];
-                        $_SESSION['patient_email'] = $check['patient_email'];
-                        $_SESSION['patient_role'] = $check['patient_role'];
-
-                        include('../../page/homePage.php');
-                        exit(); // Stop script execution after redirection
-                    } else {
-                      echo $error_message = "Error in password. Please try again.";
-                    }
-                } else {
-                    echo $error_message = "Account not found.";
-                }
-            } else {
-                echo $error_message = "Please enter a correct email.";
-            }
-        } else {
-            echo $error_message = "Please fill all fields.";
-        }
-    }
-?>
-
-<div class="login-container text-center">
+  <div class="login-container text-center">
     <h2>Login</h2>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <div class="input-group">
-            <label for="email">Patient Email</label>
-            <input type="text" id="email" name="email" required>
+            <label for="name">Patient Name</label>
+            <input type="text" id="name" name="username"  placeholder="Username" required>
         </div>
         <div class="input-group">
             <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="password" name="password"  placeholder="Password" required>
         </div>
         <div class="Alink">
             <input type="submit" name="login" value="Login">
@@ -120,6 +128,9 @@ input[type="password"] {
     </form>
 </div>
 
-<?php require_once BLA.'inc/footer.php'; ?>
+<?php } ?>
+
 </body>
 </html>
+
+<?php require_once BLA.'inc/footer.php'; ?>

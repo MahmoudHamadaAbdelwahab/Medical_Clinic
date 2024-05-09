@@ -49,17 +49,33 @@
                             <h3 class="slider-title">We're determined for your better life.</h3>
                             <p class="slider-text"> There is a big discount Up to 50% discount on your purchase</p>
                             <button class="click">
-                                <a href="../admin/admins/contactUs.php">make an appointment</a>
+                                <a href="../admin/admins/contactUs.php">Get in Touch</a>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="container text-center">
+                <!-- department page -->
+                <?php include('../doctor/department.php')?>
+                
+                <div>
+                    <h1>Doctors</h1>
+                    <!-- Doctors page -->
+                    <?php include('../doctor/Component/Com-ourDoctors.php')?>
+                </div>
+
+                <div>
+                    <h1>Last Post</h1>
+                    <!-- last post page -->
+                    <?php include('../doctor/Component/Com-lastPost.php')?>
+                </div>
+
+                <!-- links Medical page -->
+                <?php include('../admin/admins/linksMedical.php')?>
+              
+            </div>
+        <!-- footer -->
+        <?php require_once BLA.'inc/footer.php';?>
         </body>
     </html>
-    <!-- department page -->
-    <?php include('../doctor/department.php')?>
-    <!-- links Medical page -->
-    <?php include('../admin/admins/linksMedical.php')?>
-    <!-- footer -->
-    <?php require_once BLA.'inc/footer.php';?>

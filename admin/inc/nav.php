@@ -1,7 +1,9 @@
 <?php
 // Set $patient and $doctor variables based on session data
-$patient = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'patient' ? $_SESSION['patient_name'] : null;
+$patient = isset($_SESSION['patient_name']) && ($_SESSION['patient_role'] == 'patient' 
+|| $_SESSION['patient_role'] == '') ? $_SESSION['patient_name'] : null;
 $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
+
 ?>
 
 
@@ -56,7 +58,7 @@ $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doct
                             <?php echo $patient; ?>
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
-                            <li><a class="dropdown-item" href="<?php echo BURL.'patient/personalPatient.php';?>">Personal Patient</a></li>
+                            <li><a class="dropdown-item" href="<?php echo BURL.'patient/personalPatient.php';?>">Personal patient</a></li>
                             <li><a class="dropdown-item" href="<?php echo BURLA.'authentication/logout.php';?>">Logout</a></li>
                         </ul>
                     </li>
