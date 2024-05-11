@@ -2,7 +2,6 @@
     require_once('../config.php');
     require_once BL.'functions/valid.php';
     require_once BL.'functions/db.php';
-
     // show doctor data 
     $hostname = 'localhost';
     $username = 'root';
@@ -57,17 +56,12 @@
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         // Display each row as a card
                             echo "<div class='card'";
-                                // echo '<img src="data:image/jpe/g;base64,'.base64_encode($row['doctorImage']) . '" />';
-                                echo '<img src="data:imag/jpe/g;base64,'.base64_encode($row['doctorImage']) . '" />';
+                                echo '<img src="data:image/jpeg;base64,' . base64_encode($row['doctorImage']) . '" />';
                                 echo "<h4>{$row['doctorName']}</h4>";
                                 echo "<p>Specialty: {$row['doctorIsSpecialty']}</p>";
                                 echo "<p>Date: {$row['doctorDate']}</p>";
                                 echo "<p>Phone: {$row['doctorPhone']}</p>";
                                 echo "<p>Booking price : {$row['doctorSallary']}</p>";
-                                // echo '<form action="" method="POST">';
-                                // echo '<input type="hidden" name="docId" value="'.$row['doctorId'].'">';
-                                // echo '<button type="submit" name="booking" onClick=(getData())>Booking</button>';
-                                // echo '</form>';
                                 echo '<form action="" method="GET">'; // Using GET method to pass data via URL
                                     echo '<input type="hidden" name="docId" value="'.$row['doctorId'].'">';
                                     echo '<button type="submit" name="booking">Booking</button>';

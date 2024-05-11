@@ -43,8 +43,8 @@
                             <td class="text-center"><?php echo $_SESSION['doctorDate']?></td>
                             <td class="text-center"><?php echo $_SESSION['doctorSallary']?></td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-info">Edit</a>
-                                <a href="#" class="btn btn-danger delete" data-field="city_id" data_id="<?php echo $row["city_id"];?>" data-table="city">Delete</a>
+                                <a href="#" class="btn btn-info">Cancel</a>
+                                <a href="#" class="btn btn-danger delete" data-field="city_id" data_id="<?php echo $row["city_id"];?>" data-table="city">Booking Now</a>
                             </td>
                         </tr>
                     </tbody> 
