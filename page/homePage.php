@@ -8,6 +8,7 @@
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="../admin/assets/css/homePage.css">
             <style>
                 /* start slider */
                 .slider{
@@ -32,6 +33,7 @@
                     color: black
                 };
                 /* end slider */
+       
             </style>
         </head>
         <body>
@@ -55,25 +57,48 @@
                     </div>
                 </div>
             </div>
-            <div class="container text-center">
-                <!-- department page -->
-                <?php include('../doctor/department.php')?>
-                
-                <div>
-                    <h1>Doctors</h1>
-                    <!-- Doctors page -->
-                    <?php include('../doctor/Component/Com-ourDoctors.php')?>
-                </div>
-
-                <div>
+            <div class="container text-center" style="height:100%">
+                    <!-- department page -->
+                    <?php include('../doctor/department.php')?>
+                    
+                    <div>
+                        <!-- Doctors page -->
+                        <h1>Doctors</h1>
+                        <div class="allDoctors">
+                            <?php
+                                require_once BL.'functions/db.php';
+                                require_once BL.'functions/messages.php';
+                                require_once BL.'functions/valid.php';
+                                $query = "SELECT * FROM doctor";
+                                $result = mysqli_query($conn , $query);
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "
+                                    <div>
+                                        <div class='card' style='width: 18rem;'>
+                                            <img src='../admin/dashboard/$row[doctorImage]' class='card-img-top'>
+                                            <div class='card-body'>
+                                                <h5 class='card-title'>$row[doctorName]</h5>
+                                                <p class='card-text'>$row[doctorIsSpecialty]</p>
+                                                <p class='card-text'>$row[doctorPhone]</p>
+                                                <p class='card-text'>$row[doctorDate]</p>
+                                                <p class='card-text'>$row[doctor_booking_price]</p>
+                                                <a href='booking.php? id=$row[doctorId]' class='btn btn-primary'>Booking Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ";
+                                }
+                            ?>
+                         </div>
+                    </div>
+               
                     <h1>Last Post</h1>
                     <!-- last post page -->
                     <?php include('../doctor/Component/Com-lastPost.php')?>
-                </div>
-
-                <!-- links Medical page -->
-                <?php include('../admin/admins/linksMedical.php')?>
-              
+                
+                    <h1>Links</h1>
+                    <!-- links Medical page -->
+                    <?php include('../admin/admins/linksMedical.php')?>
             </div>
         <!-- footer -->
         <?php require_once BLA.'inc/footer.php';?>

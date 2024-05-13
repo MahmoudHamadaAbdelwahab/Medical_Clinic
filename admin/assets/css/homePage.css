@@ -1,0 +1,13 @@
+/* start all doctor */
+.allDoctors{
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 15px;
+}
+.allDoctors .card img{
+width: 100%;
+height: 200px;
+padding: 10px;
+}
+/* end all doctor */

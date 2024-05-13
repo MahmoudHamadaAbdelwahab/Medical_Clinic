@@ -54,18 +54,19 @@
                 try {
                     $stmt = $pdo->query("SELECT * FROM doctor");
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        
                         // Display each row as a card
                             echo "<div class='card'";
-                                echo '<img src="data:image/jpeg;base64,' . base64_encode($row['doctorImage']) . '" />';
+                                echo "<img src='../../admin/dashboard/{$row['doctorImage']}'/>";
                                 echo "<h4>{$row['doctorName']}</h4>";
                                 echo "<p>Specialty: {$row['doctorIsSpecialty']}</p>";
                                 echo "<p>Date: {$row['doctorDate']}</p>";
                                 echo "<p>Phone: {$row['doctorPhone']}</p>";
-                                echo "<p>Booking price : {$row['doctorSallary']}</p>";
-                                echo '<form action="" method="GET">'; // Using GET method to pass data via URL
+                                echo "<p>Booking price : {$row['doctor_booking_price']}</p>";
+                                //echo '<form action="" method="GET">'; // Using GET method to pass data via URL
                                     echo '<input type="hidden" name="docId" value="'.$row['doctorId'].'">';
                                     echo '<button type="submit" name="booking">Booking</button>';
-                                echo '</form>';
+                                //echo '</form>';
                             echo "</div>";
                     }
                 } catch (PDOException $e) {

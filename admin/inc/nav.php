@@ -3,6 +3,7 @@
 $patient = isset($_SESSION['patient_name']) && ($_SESSION['patient_role'] == 'patient' 
 || $_SESSION['patient_role'] == '') ? $_SESSION['patient_name'] : null;
 $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
+$admin = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'admin' ? $_SESSION['patient_name'] : null;
 
 ?>
 
@@ -72,6 +73,19 @@ $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doct
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
                             <li><a class="dropdown-item" href="<?php echo BURL.'doctor/personalDoctor.php';?>">Personal doctor</a></li>
+                            <li><a class="dropdown-item" href="<?php echo BURLA.'authentication/logout.php';?>">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul> 
+            <!-- admin dashboard -->
+            <?php elseif($admin): ?>
+                  <ul class="navbar-nav"> 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <?php echo $admin; ?>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownUser">
+                            <li><a class="dropdown-item" href="<?php echo BURLA.'dashboard/dashboard.php';?>">Dashboard Admin</a></li>
                             <li><a class="dropdown-item" href="<?php echo BURLA.'authentication/logout.php';?>">Logout</a></li>
                         </ul>
                     </li>

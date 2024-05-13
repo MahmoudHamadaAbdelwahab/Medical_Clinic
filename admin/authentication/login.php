@@ -23,17 +23,23 @@
                 $_SESSION['PatientId'] = $user['PatientId'];
                 $_SESSION['patient_name'] = $user['patient_name'];
                 $_SESSION['patient_role'] = $user['patient_role'];
-
-                $delay = 1;  // Delay in seconds before refreshing the page
+                // <a 
+                // style='text-decoration:none;'
+                // href='../../page/homePage.php'>go to homePage</a>
+                $delay = 2;  // Delay in seconds before refreshing the page
                 header("Refresh: $delay"); // Redirect to the current page after the specified delay
+                echo $success_message = "<h3>successfully login</h3>";
                 echo "<div class='form_success'>
                          <h3> successfully login </h3><br/>
                      </div>";
+                header('location:../../page/homePage.php');
         } else {
+            echo $error_message = "<h3>Incorrect Username or password.</h3>";
             echo "<div class='form_error'>
                     <h3>Incorrect Username or password.</h3><br/>
                  </div>";
-                }
+            header('location:login.php');
+            }
     }else{
 ?>
 <!DOCTYPE html>
@@ -75,22 +81,18 @@ input[type="password"] {
     border-radius: 3px;
     box-sizing: border-box;
 }
-
-.Alink{
+  button{
     width: 100%;
     padding: 10px;
     background-color: #0d6efd;
+    color: white;
     border: none;
     border-radius: 3px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  .Alink input{
-    background-color: #0d6efd;
-    color: white;
-  }
 
-  .form_success ,
+  .form_success,
    .form_error{
         display: flex;
         justify-content: center;
@@ -113,16 +115,14 @@ input[type="password"] {
     <h2>Login</h2>
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
         <div class="input-group">
-            <label for="name">Patient Name</label>
+            <label for="name">User Name</label>
             <input type="text" id="name" name="username"  placeholder="Username" required>
         </div>
         <div class="input-group">
-            <label for="password">Password</label>
+            <label for="password">User Password</label>
             <input type="password" id="password" name="password"  placeholder="Password" required>
         </div>
-        <div class="Alink">
-            <input type="submit" name="login" value="Login">
-        </div>
+        <button name="login">Login</button>
         Don't have an account?
         <a href="<?php echo BURLA.'authentication/register.php'; ?>">Register</a>
     </form>

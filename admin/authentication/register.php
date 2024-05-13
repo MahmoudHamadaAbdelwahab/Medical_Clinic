@@ -53,10 +53,12 @@
         $username = mysqli_real_escape_string($conn, $username);
         $email    = stripslashes($_REQUEST['email']);
         $email    = mysqli_real_escape_string($conn, $email);
+        $roles    = stripslashes($_REQUEST['role']);
+        $roles    = mysqli_real_escape_string($conn,$roles);
         $password = stripslashes($_REQUEST['password']);
         $password = mysqli_real_escape_string($conn, $password);
         // $create_datetime = date("Y-m-d H:i:s");
-        $query = "INSERT INTO patient (patient_name, patient_email, patient_password) VALUES ('$username', '$email', '$password')";
+        $query = "INSERT INTO patient (patient_name, patient_email, patient_password , patient_role) VALUES ('$username', '$email', '$password' , '$roles')";
         $result   = mysqli_query($conn, $query);
         if ($result) {
             echo "<div class='form_success container'>
@@ -71,40 +73,34 @@
         }
     } else {
 ?>
-    <!-- <form class="form" action="" method="post">
-        <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="username" placeholder="Username" required />
-        <input type="text" class="login-input" name="email" placeholder="Email Address">
-        <input type="password" class="login-input" name="password" placeholder="Password">
-        <input type="submit" name="submit" value="Register" class="login-button">
-        <p class="link"><a href="./login.php">Click to Login</a></p>
-    </form> -->
     <div class="register-container text-center">
    <h2 class="text">Register page</h2>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <div class="input-group">
-            <label for="username">Patient name</label>
+            <label for="username">User name</label>
             <input type="text" id="username" name="username" placeholder="Username" required />
-          
         </div>
         <div class="input-group">
-            <label for="email">Patient Email</label>
+            <label for="email">User Email</label>
             <input type="email" id="email" name="email" placeholder="Email Address" required>
-            
         </div>
         <div class="input-group">
-            <label for="password">Password</label>
+            <label aria-label="Default select example" for="role">Choose:</label>
+            <select id="role" name="role" required style="margin: 3px;">
+                <option value="" style="display: none;">Choose Here</option>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="password">User Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
-            
         </div>
         <div class="Alink">
             <input type="submit" name="submit" value="Register">
         </div>
     </form>
 </div>
-
-
-
 <?php
     }
 ?>
