@@ -1,56 +1,65 @@
 
 <?php
-    require_once('../../config.php');
-    require_once BL.'functions/db.php';
-    require_once BL.'functions/messages.php';
-    require_once BL.'functions/valid.php';
-    require_once BLA.'inc/nav.php';
+require_once('../../config.php');
+require_once BL.'functions/db.php';
+require_once BL.'functions/messages.php';
+require_once BL.'functions/valid.php';
+require_once BLA.'inc/nav.php';
 
-    // When form submitted, check and create user session.
-    if (isset($_POST['username'])) {
-        $username = stripslashes($_REQUEST['username']);// removes backslashes
-        $username = mysqli_real_escape_string($conn, $username);
-        $password = stripslashes($_REQUEST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
+// When form submitted, check and create user session.
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    $username = stripslashes($_REQUEST['username']); // removes backslashes
+    $username = mysqli_real_escape_string($conn, $username);
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+    
+    // Check user existence in the database
+    $query1 = "SELECT * FROM patient WHERE patient_name = '$username' AND patient_password = '$password'";
+    $query2 = "SELECT * FROM doctor WHERE doctorName = '$username' AND doctorPassword = '$password'";
+    
+    $result1 = mysqli_query($conn, $query1);
+    $result2 = mysqli_query($conn, $query2);
+    
+    if (mysqli_num_rows($result1) == 1) {
+        $user = mysqli_fetch_assoc($result1);
         
-        // Check user is exist in the database
-        $query = "SELECT * FROM patient WHERE patient_name = '$username' AND patient_password = '$password'";
-        $result = mysqli_query($conn, $query);
-        $rows = mysqli_num_rows($result);
-        if ($rows == 1) {
-                $user = mysqli_fetch_assoc($result);
-                // Login successful, set session variables
-                $_SESSION['PatientId'] = $user['PatientId'];
-                $_SESSION['patient_name'] = $user['patient_name'];
-                $_SESSION['patient_role'] = $user['patient_role'];
-                // <a 
-                // style='text-decoration:none;'
-                // href='../../page/homePage.php'>go to homePage</a>
-                $delay = 2;  // Delay in seconds before refreshing the page
-                header("Refresh: $delay"); // Redirect to the current page after the specified delay
-                echo $success_message = "<h3>successfully login</h3>";
-                echo "<div class='form_success'>
-                         <h3> successfully login </h3><br/>
-                     </div>";
-                header('location:../../page/homePage.php');
-        } else {
-            echo $error_message = "<h3>Incorrect Username or password.</h3>";
-            echo "<div class='form_error'>
-                    <h3>Incorrect Username or password.</h3><br/>
-                 </div>";
-            header('location:login.php');
-            }
-    }else{
+        // Login successful, set session variables for patient
+        $_SESSION['PatientId'] = $user['PatientId'];
+        $_SESSION['patient_name'] = $user['patient_name'];
+        $_SESSION['patient_role'] = $user['patient_role'];
+        
+        $success_message = "<h3>Successfully logged in as patient.</h3>";
+    } elseif (mysqli_num_rows($result2) == 1) {
+        $user = mysqli_fetch_assoc($result2);
+        
+        // Login successful, set session variables for doctor
+        $_SESSION['doctorId'] = $user['doctorId'];
+        $_SESSION['doctorName'] = $user['doctorName'];
+        $_SESSION['doctorRole'] = $user['doctorRole'];
+        
+        $success_message = "<h3>Successfully logged in as doctor.</h3>";
+    } else {
+        $error_message = "<h3>Incorrect Username or password.</h3>";
+        echo "<div class='form_error'>$error_message<br/></div>";
+        header('Location: login.php');
+        exit();
+    }
+    
+    echo "<div class='form_success'>$success_message<br/></div>";
+    header('Location: ../../page/homePage.php');
+    exit();
+} else {
 ?>
+
+<!-- HTML Form code here -->
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
     <title>Login</title>
     <link rel="stylesheet" href="style.css"/>
-
 <style>
-.login-container {
+.login .container {
     max-width: 400px;
     margin: 50px auto;
     background-color: #fff;
@@ -106,28 +115,32 @@ input[type="password"] {
         text-decoration: none;
         cursor: pointer;
     }
+    a{
+        text-decoration: none;
+        cursor: pointer; 
+    }
 </style>
 
 </head>
 <body>
-
-  <div class="login-container text-center">
-    <h2>Login</h2>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-        <div class="input-group">
-            <label for="name">User Name</label>
-            <input type="text" id="name" name="username"  placeholder="Username" required>
+    <div class="login">
+        <div class="container text-center">
+            <h2>Login</h2>
+            <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+                <div class="input-group">
+                    <label for="name">User Name</label>
+                    <input type="text" id="name" name="username"  placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">User Password</label>
+                    <input type="password" id="password" name="password"  placeholder="Password" required>
+                </div>
+                <button name="login">Login</button>
+                Don't have an account?
+                <a href="<?php echo BURLA.'authentication/register.php'; ?>">Register</a>
+            </form>
         </div>
-        <div class="input-group">
-            <label for="password">User Password</label>
-            <input type="password" id="password" name="password"  placeholder="Password" required>
-        </div>
-        <button name="login">Login</button>
-        Don't have an account?
-        <a href="<?php echo BURLA.'authentication/register.php'; ?>">Register</a>
-    </form>
-</div>
-
+    </div>
 <?php } ?>
 
 </body>

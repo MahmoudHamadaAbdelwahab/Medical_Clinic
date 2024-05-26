@@ -21,6 +21,10 @@
                 <img src="logo.png" alt="logo" width="400px" style="margin: 10px;">
                 <input type="text" id="name" name="name" placeholder="Writing  doctor's name">
                 <br>
+                <input type="text" id="password" name="password" placeholder="Writing  doctor's password">
+                <br>
+                <input type="text" id="role" name="role" value="doctor" style="display: none;">
+                <!-- <br> -->
                 <input type="text" id="specialty" name="specialty" placeholder="Writing doctor's specialty">
                 <br>
                 <input type="text" id="Phone" name="Phone" placeholder="Writing doctor's phone">

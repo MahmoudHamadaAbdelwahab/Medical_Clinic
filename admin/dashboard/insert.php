@@ -8,6 +8,8 @@
     
     if(isset($_POST['upload'])){
         $name = $_POST['name'];
+        $password = $_POST['password'];
+        $role = $_POST['role'];
         $specialty = $_POST['specialty'];
         $Phone = $_POST['Phone'];
         $input_date=$_POST['date'];
@@ -20,7 +22,7 @@
         $image_up = "image/".$image_name; // it's folder upload inside the image
     
         // insert data to database
-        $insert = "INSERT INTO doctor (doctorName , doctorIsSpecialty , doctorPhone , doctorDate , doctorImage , doctor_booking_price) VALUES ('$name','$specialty','$Phone' ,'$date','$image_up','$price')";
+        $insert = "INSERT INTO doctor (doctorName , doctorPassword , doctorRole ,doctorIsSpecialty , doctorPhone , doctorDate , doctorImage , doctor_booking_price) VALUES ('$name','$password','$role','$specialty','$Phone' ,'$date','$image_up','$price')";
         mysqli_query($conn , $insert);
         // Make sure the files are uploaded to folder image 
         if(move_uploaded_file($image_location , 'image/'.$image_name)){

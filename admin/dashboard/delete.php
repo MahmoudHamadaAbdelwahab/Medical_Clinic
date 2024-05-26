@@ -12,6 +12,6 @@
         alert("تم حذف المنتج بنجاح")
     </script>
     '; 
-    header('location:products.php');
+    header('location:showAllDoctors.php');
 ?>
 <?php require_once BLA.'inc/footer.php'; ?>

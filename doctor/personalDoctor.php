@@ -9,55 +9,8 @@
         dir('Error' . mysqli_connect_error());
     }
 
-    $patient = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'patient' ? $_SESSION['patient_name'] : null;
-    $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
+    $doctor = isset($_SESSION['doctorName']) && $_SESSION['doctorRole'] == 'doctor' ? $_SESSION['doctorName'] : null;
 
-    // $err_s = 0;
-
-    // if(isset($_POST['submit'])){
-    //     $filename = $_FILES["choosefile"]["name"];
-    //     $tempname = $_FILES["choosefile"]["tmp_name"];  
-    //     $folder = "../imag/gallery/".$filename;   
-        
-    //     $writeOverview = $_POST['writeOverview'];
-    //     $writeHere = $_POST['writeHere'];
-
-    //     if(empty($filename)){
-    //         $user_error = '<p id="error">Please enter image.</p><br>';
-    //         $err_s = 1;
-    //     } elseif(empty($writeOverview)){
-    //         $user_error = '<p id="error">Please enter write overview.</p><br>';
-    //         $err_s = 1;
-    //     } elseif(empty($writeHere)){
-    //         $user_error = '<p id="error">Please enter write here.</p><br>';
-    //         $err_s = 1;
-    //     } elseif(strlen($writeHere) > 255 ){
-    //         $user_error = '<p id="error">Please keep the character length less than 255.</p><br>';
-    //         $err_s = 1;
-    //     }
-
-    //     if($err_s == 0){ // Removed $num_rows check for username existence since it's not relevant here
-    //         $sql = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere) VALUES ('$filename', '$writeOverview', '$writeHere')";
-            
-    //         mysqli_query($conn, $sql);
-    //         // Add the image to the "image" folder"
-    //         if (move_uploaded_file($tempname, $folder)) {
-    //             echo "Image uploaded successfully";
-    //         }else{
-    //             echo "Failed to upload image";
-    //         }
-
-    //         if(mysqli_query($conn, $sql)){
-     
-    //             // Redirect to a success page or show a success message
-    //             header('Location: success.php');
-    //             exit();
-    //         } else {
-    //             // Handle database insertion error
-    //             echo $error_message = '<p id="error">Error inserting data into database.</p>';
-    //         }
-    //     }
-    // }
 ?>
 
 <!DOCTYPE html>
@@ -172,9 +125,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
              <?php //if(isset($success_message)) echo $success_message; ?>
 
         <div class="col-sm-12">
-
             <h3 class="p-3 bg-primary text-white">
-            Welcome <?php echo $_SESSION['patient_name']; ?> , reservation
+            Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
             </h3>
 
             <table class="table table-dark table-bordered">
@@ -219,6 +171,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="writeHere">Write here</label>
                     <input type="textarea" id="writeHere" name="writeHere">
                 </div>
+                <div class="input-group">
+                    <a href="posted_I_Created.php" style="text-decoration: none; color:#0d6efd; font-weight:bold;">Posts i created</a>
+                </div>
+                <br>
                 <button class="Alink" name="submit">New post</button>
             </form>
         </div>

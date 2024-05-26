@@ -1,7 +1,7 @@
 <?php
     require_once('../../config.php');
 
-    if(isset($_SESSION['patient_name'])){
+    if(isset($_SESSION['patient_name']) || isset($_SESSION['doctorName'])){
         session_destroy();
         header('location:'.BURLA.'authentication/login.php');
     }else{

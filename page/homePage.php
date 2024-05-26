@@ -82,7 +82,7 @@
                                                 <p class='card-text'>$row[doctorPhone]</p>
                                                 <p class='card-text'>$row[doctorDate]</p>
                                                 <p class='card-text'>$row[doctor_booking_price]</p>
-                                                <a href='booking.php? id=$row[doctorId]' class='btn btn-primary'>Booking Now</a>
+                                                <a href='../patient/personalPatient.php? id=$row[doctorId]' class='btn btn-primary'>Booking Now</a>
                                             </div>
                                         </div>
                                     </div>

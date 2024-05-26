@@ -2,7 +2,8 @@
 // Set $patient and $doctor variables based on session data
 $patient = isset($_SESSION['patient_name']) && ($_SESSION['patient_role'] == 'patient' 
 || $_SESSION['patient_role'] == '') ? $_SESSION['patient_name'] : null;
-$doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
+// $doctor = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'doctor' ? $_SESSION['patient_name'] : null;
+$doctor = isset($_SESSION['doctorName']) && $_SESSION['doctorRole'] == 'doctor' ? $_SESSION['doctorName'] : null;
 $admin = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'admin' ? $_SESSION['patient_name'] : null;
 
 ?>
@@ -27,7 +28,9 @@ $admin = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'admin
     <div class="container">
         <a class="navbar-brand" href="<?php echo BURL_PAGE.'homePage.php';?>">Medical Clinic</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon">
+                <i class="fas fa-navicon" style="color:#0d6efd; font-size:28px;"></i>
+            </span>
         </button>
         <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">

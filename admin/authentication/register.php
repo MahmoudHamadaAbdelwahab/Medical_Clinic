@@ -84,17 +84,21 @@
             <label for="email">User Email</label>
             <input type="email" id="email" name="email" placeholder="Email Address" required>
         </div>
-        <div class="input-group">
-            <label aria-label="Default select example" for="role">Choose:</label>
-            <select id="role" name="role" required style="margin: 3px;">
+        <!-- <div class="input-group"> -->
+            <!-- <label aria-label="Default select example" for="role">Choose:</label> -->
+            <!-- <select id="role" name="role" required style="margin: 3px;">
                 <option value="" style="display: none;">Choose Here</option>
                 <option value="doctor">Doctor</option>
                 <option value="patient">Patient</option>
-            </select>
-        </div>
+            </select> -->
+        <!-- </div> -->
+
         <div class="input-group">
             <label for="password">User Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <div class="input-group" style="display: none;">
+            <input type="text" id="role" name="role" value="patient">
         </div>
         <div class="Alink">
             <input type="submit" name="submit" value="Register">

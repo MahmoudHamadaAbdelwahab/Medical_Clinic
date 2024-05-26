@@ -3,6 +3,8 @@
     require_once BLA.'inc/nav.php';
     require_once BL.'functions/valid.php';
     require_once BL.'functions/db.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -29,16 +31,40 @@
                         <div class='text-SpecialDoc'>
                             <h3>Our new doctors</h3>
                         </div>
-               
-                        <?php include('Component/Com-ourDoctors.php')?>
+                        <!-- show all doctors -->
+                        <div class="allDoctors text-center">
+                            <?php
+                                $query = "SELECT * FROM doctor";
+                                $result = mysqli_query($conn , $query);
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "
+                                    <form action='' method='post'>
+                                        <div>
+                                            <div class='card' style='width: 18rem;'>
+                                                <img src='../admin/dashboard/$row[doctorImage]' class='card-img-top'>
+                                                <div class='card-body'>
+                                                    <h5 class='card-title'>$row[doctorName]</h5>
+                                                    <p class='card-text'>$row[doctorIsSpecialty]</p>
+                                                    <p class='card-text'>$row[doctorPhone]</p>
+                                                    <p class='card-text'>$row[doctorDate]</p>
+                                                    <p class='card-text'>$row[doctor_booking_price]</p>
+                                                    <input type='text' id_Patient=$_SESSION[PatientId] style='display:none;'>
+                                                    <input type='text' id_doctor=$row[doctorId] style='display:none;'>
+                                                    <a href='../patient/personalPatient.php? id_doctor=$row[doctorId]' name='Booking' class='btn btn-primary'>Booking Now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </from>    
+                                    ";
+                                }
+                            ?>
+                         </div>
 
                     </div>
                 </div>
         </div>
 </div>
-    <!-- code js -->
-    <script>
-    </script>
+
 </body>
 </html>
 <?php require_once BLA.'inc/footer.php';?>
