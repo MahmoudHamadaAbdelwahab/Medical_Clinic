@@ -31,14 +31,14 @@
 /* end our doctors*/
 
 /* start all doctor */
- .allDoctors{
+ .allDoctors {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 15px;
     text-align: center;
     }
-  .OurDoctors .allDoctors .card img{
+  .OurDoctors .allDoctors  .card img{
     width: 100%;
     height: 200px;
     padding: 10px;

@@ -84,13 +84,14 @@
 // code chat gpt 
 $error_message = '';
 $success_message = '';
+$doctor_id = $_SESSION['doctorId'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if the form is submitted for creating a new post
     if (isset($_POST['submit'])) {
         $writeOverview = $_POST['writeOverview'];
         $writeHere = $_POST['writeHere'];
-
+        $id = $_POST['doctor_id'];
         // Check if file is uploaded
         if (isset($_FILES['choosefile']) && $_FILES['choosefile']['error'] === UPLOAD_ERR_OK) {
             $filename = $_FILES["choosefile"]["name"];
@@ -100,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Move the uploaded file to the specified folder
             if (move_uploaded_file($tempname, $folder)) {
                 // File upload successful, now insert post data into the database
-             $sql = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere) VALUES ('$filename', '$writeOverview', '$writeHere')";
+             $sql = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere , doctor_Id ) VALUES ('$filename', '$writeOverview', '$writeHere' , '$id')";
                 if (mysqli_query($conn, $sql)) {
                     echo $success_message = "
                     <div class='go_lastPost'>
@@ -120,10 +121,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
     <div class="container text-center">
-             <!-- Display error or success message if set -->
-             <?php //if(isset($error_message)) echo $error_message; ?>
-             <?php //if(isset($success_message)) echo $success_message; ?>
-
         <div class="col-sm-12">
             <h3 class="p-3 bg-primary text-white">
             Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
@@ -173,6 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="input-group">
                     <a href="posted_I_Created.php" style="text-decoration: none; color:#0d6efd; font-weight:bold;">Posts i created</a>
+                    <input type="text" name="doctor_id" value="<?php echo $doctor_id?>" style="display: none;">
                 </div>
                 <br>
                 <button class="Alink" name="submit">New post</button>

@@ -26,6 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // Login successful, set session variables for patient
         $_SESSION['PatientId'] = $user['PatientId'];
         $_SESSION['patient_name'] = $user['patient_name'];
+        $_SESSION['patient_email'] = $user['patient_email'];
         $_SESSION['patient_role'] = $user['patient_role'];
         
         $success_message = "<h3>Successfully logged in as patient.</h3>";

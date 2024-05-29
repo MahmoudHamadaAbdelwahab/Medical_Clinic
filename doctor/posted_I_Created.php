@@ -23,8 +23,10 @@
     require_once BL.'functions/valid.php';
     require_once BL.'functions/messages.php';
     require_once BL.'functions/db.php';
+    $id = $_SESSION['doctorId'];
+    
       echo "<h2 class='text-center'>Posted i created</h2>";
-      $query = "SELECT * FROM lastpost";
+      $query = "SELECT * FROM lastpost WHERE doctor_Id = '$id'";
         $result = mysqli_query($conn , $query);
         while($row = mysqli_fetch_array($result)){
             echo "
