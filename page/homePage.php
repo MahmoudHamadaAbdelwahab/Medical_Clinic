@@ -58,9 +58,11 @@
                 </div>
             </div>
             <div class="container text-center" style="height:100%">
-                    <!-- department page -->
+                    <!-- start department page -->
                     <?php include('../doctor/department.php')?>
-                    
+                    <!-- end department page -->
+
+                    <!-- start show all doctor -->
                     <div>
                         <!-- Doctors page -->
                         <h1>Doctors</h1>
@@ -82,7 +84,6 @@
                                                 <p class='card-text'>$row[doctorPhone]</p>
                                                 <p class='card-text'>$row[doctorDate]</p>
                                                 <p class='card-text'>$row[doctor_booking_price]</p>
-                                                <a href='../patient/personalPatient.php? id=$row[doctorId]' class='btn btn-primary'>Booking Now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -91,14 +92,44 @@
                             ?>
                          </div>
                     </div>
-               
-                    <h1>Last Post</h1>
-                    <!-- last post page -->
-                    <?php include('../doctor/Component/Com-lastPost.php')?>
-                
+                    <!-- end show all doctor -->
+
+                    <!-- start last post -->
+                    <div>
+                        <!-- last post -->
+                        <h1>last post</h1>
+                        <div class="allDoctors">
+                            <?php
+                                require_once BL.'functions/db.php';
+                                require_once BL.'functions/messages.php';
+                                require_once BL.'functions/valid.php';
+                                $query = "SELECT * FROM lastpost";
+                                $result = mysqli_query($conn , $query);
+                                while($row = mysqli_fetch_array($result)){
+                                    $image_path = $row['lastPost_Image'];
+                                    $About = mb_strimwidth($row['lastPost_About'], 0, 25 , "...");
+                                    $writeHere = mb_strimwidth($row['lastPost_writeHere'], 0, 70, "...");
+                                    echo "
+                                    <div>
+                                        <div class='card' style='width: 18rem;'>
+                                            <img src='../doctor/$image_path' class='card-img-top'>
+                                            <div class='card-body'>
+                                                <h5 class='card-title'>$About</h5>
+                                                <p class='card-text'>$writeHere</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ";
+                                }
+                            ?>
+                         </div>
+                    </div>
+                    <!-- ent last post -->
+
+                    <!-- start links Medical page -->
                     <h1>Links</h1>
-                    <!-- links Medical page -->
                     <?php include('../admin/admins/linksMedical.php')?>
+                    <!-- end links Medical page -->
             </div>
         <!-- footer -->
         <?php require_once BLA.'inc/footer.php';?>

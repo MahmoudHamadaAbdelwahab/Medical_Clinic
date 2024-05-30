@@ -8,7 +8,6 @@ $admin = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'admin
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,5 +100,5 @@ $admin = isset($_SESSION['patient_name']) && $_SESSION['patient_role'] == 'admin
 </nav>
               
     <!-- start footer -->
-    <div class="container-fluid mt-5 mb-5 sticky-button">
+    <div class="container-fluid mb-3 sticky-button">
     <div class="row">

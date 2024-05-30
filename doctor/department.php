@@ -17,6 +17,7 @@
     } catch (PDOException $e) {
         die("Error: " . $e->getMessage());
     }
+
     ?>
 
 <!DOCTYPE html>
@@ -36,7 +37,7 @@
     </style>
 </head>
 <body>
-<div class='department text-center mt-3 mb-3'>
+    <div class='department text-center mt-3 mb-3'>
         <div class="container">
         <h1>Medical departments</h1>
             <div class='row'>
@@ -48,6 +49,7 @@
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                         echo "<div class='justify-content-center col-sm-2 col-md-2 col-lg-2'>";
                         echo '<img src="data:image/jpe/g;base64,'.base64_encode($row['depart_imag']) . '" />';
+                        // echo "<img src='$row[lastPost_Image]' class='card-img-top'>"
                         echo "<h4>{$row['depart_name']}</h4>";
                         echo "</div>";
                         }

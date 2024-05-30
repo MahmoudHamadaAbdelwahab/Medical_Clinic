@@ -15,10 +15,13 @@
 <body>
     <center>
         <div class="main">
+            <div>
+                <h1>Dashboard Admin</h1>
+            </div>
             <!-- this code special upload image enctype="multipart/form-data" -->
             <form action="insert.php" method="post" enctype="multipart/form-data">
-                <h2>Dashboard Admin</h2>
-                <img src="logo.png" alt="logo" width="400px" style="margin: 10px;">
+                <img src="doctorLogo.png" alt="logo" width="100px" height="100px" style="margin: 10px;">
+                <br>
                 <input type="text" id="name" name="name" placeholder="Writing  doctor's name">
                 <br>
                 <input type="text" id="password" name="password" placeholder="Writing  doctor's password">
@@ -41,6 +44,20 @@
                 <br>
                 <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
             </form>
+
+            <!-- add new department  -->
+            <!-- <form action="insert.php" method="post" enctype="multipart/form-data">
+                <img src="departMent.png" alt="logo" width="100px" style="margin: 10px;">
+                <br>
+                <input type="text" id="depart_name" name="depart_name" placeholder="Writing department name">
+                <br>
+                <label for="file">Choose Image Department</label>
+                <button name="uploadDepart">Upload Department New</button>
+                <br>
+                <a class="goToPage" href="showAllDepartment.php">Show All Department</a>
+                <br>
+                <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
+            </form> -->
         </div>
     </center>
 </body>

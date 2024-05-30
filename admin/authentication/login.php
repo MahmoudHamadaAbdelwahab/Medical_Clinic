@@ -1,4 +1,3 @@
-
 <?php
 require_once('../../config.php');
 require_once BL.'functions/db.php';
@@ -60,6 +59,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <title>Login</title>
     <link rel="stylesheet" href="style.css"/>
 <style>
+.login{
+ height: 590px;
+}
 .login .container {
     max-width: 400px;
     margin: 50px auto;

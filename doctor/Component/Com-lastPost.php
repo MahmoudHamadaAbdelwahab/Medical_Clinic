@@ -25,7 +25,7 @@
                                 $writeHere = mb_strimwidth($row['lastPost_writeHere'], 0, 70, "...");
                                 echo "
                                 <div class='card text-center' style='width: 18rem;'>
-                                        <img src='../imag/gallery/$image_path' alt='Image' width='100%' height='200'><br>
+                                        <img src='$image_path' alt='Image' width='100%' height='200'><br>
                                     <div class='text'>
                                         <h5 class='card-title'>$About</h5>    
                                         <p class='card-text'>$writeHere</p>    

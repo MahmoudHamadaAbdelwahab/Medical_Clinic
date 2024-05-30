@@ -33,7 +33,7 @@
             <center>
                 <main>
                     <div class='card' style='width: 18rem;'>
-                        <img src='../imag/gallery/$row[lastPost_Image]' class='card-img-top'>
+                        <img src='$row[lastPost_Image]' class='card-img-top'>
                         <div class='card-body'>
                             <h5 class='card-title'>$row[lastPost_About]</h5>
                             <p class='card-text'>$row[lastPost_writeHere]</p>

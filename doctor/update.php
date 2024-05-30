@@ -4,6 +4,7 @@
      require_once BL.'functions/valid.php';
      require_once BL.'functions/messages.php';
      require_once BL.'functions/db.php';
+        // show to data by way id 
         $id = $_GET['id'];
         $update = mysqli_query($conn , "SELECT * FROM lastpost WHERE lastPost_Id  = $id");
         $data = mysqli_fetch_array($update);
@@ -11,22 +12,21 @@
         // update the post then sent data to table lastpost in database
         if(isset($_POST['update'])){
             $Id = $_POST['id'];
-            $image = $_POST['image'];
             $about = $_POST['about'];
             $writeHere = $_POST['writeHere'];
-            // $image = $_FILES['image'];
-            // $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
-            // $image_name = $_FILES['image']['name'];
-            // $image_up = "image".$image_name; // it's folder upload inside the image
+            $image = $_FILES['image'];
+            $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
+            $image_name = $_FILES['image']['name'];
+            $image_up = "image".$image_name; // it's folder upload inside the image
             
             // insert data to database
-            $update = "UPDATE lastpost SET lastPost_Image='$image' , lastPost_About='$about' , lastPost_writeHere='$writeHere' WHERE lastPost_Id=$Id";
+            $update = "UPDATE lastpost SET lastPost_Image='$image_up' , lastPost_About='$about' , lastPost_writeHere='$writeHere' WHERE lastPost_Id=$Id";
             mysqli_query($conn , $update);
             // Make sure the files are uploaded to folder image 
             if(move_uploaded_file($image_location , 'image'.$image_name)){
                 echo'
                     <script>
-                        alert("The post has been updated successfully")ك
+                        alert("The post has been updated successfully")
                     </script>
                 ';
                 header('location:lastPostPage.php');

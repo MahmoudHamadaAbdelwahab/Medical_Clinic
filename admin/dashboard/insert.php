@@ -20,7 +20,6 @@
         $image_name = $_FILES['image']['name'];
         // $image_up = "image/".$image_name; // it's folder upload inside the image
         $image_up = "image/".$image_name; // it's folder upload inside the image
-    
         // insert data to database
         $insert = "INSERT INTO doctor (doctorName , doctorPassword , doctorRole ,doctorIsSpecialty , doctorPhone , doctorDate , doctorImage , doctor_booking_price) VALUES ('$name','$password','$role','$specialty','$Phone' ,'$date','$image_up','$price')";
         mysqli_query($conn , $insert);
@@ -40,5 +39,35 @@
         ';
         }
     }
+
+    // add the department 
+    if(isset($_POST['uploadDepart'])){
+        $doctorName = $_POST['depart_name'];
+        $doctorId = $_POST['doctor_Id'];
+        $image = $_FILES['image'];
+        $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
+        $image_name = $_FILES['image']['name'];
+        $image_up = "image/".$image_name; // it's folder upload inside the image
+        // insert data to database
+        $insert = "INSERT INTO medicaldepartments (depart_name , depart_imag , doctor_id ) VALUES ('$doctorName' , '$image_up' , '')";
+        mysqli_query($conn , $insert);
+        // Make sure the files are uploaded to folder image 
+        if(move_uploaded_file($image_location , 'image/'.$image_name)){
+            echo'
+                <script>
+                    alert("it is upload department successfully")
+                </script>
+            ';
+            header('location:dashboard.php');
+        }else{
+            echo'
+            <script>
+                alert("it is found error not upload the department")
+            </script>
+        ';
+        }
+    }
+
+
 ?>
 <?php require_once BLA.'inc/footer.php'; ?>

@@ -81,46 +81,37 @@
 </head>
 <body>
 <?php
-// code chat gpt 
-$error_message = '';
-$success_message = '';
-$doctor_id = $_SESSION['doctorId'];
+    $error_message = '';
+    $success_message = '';
+    $doctor_id = $_SESSION['doctorId'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Check if the form is submitted for creating a new post
-    if (isset($_POST['submit'])) {
-        $writeOverview = $_POST['writeOverview'];
-        $writeHere = $_POST['writeHere'];
-        $id = $_POST['doctor_id'];
-        // Check if file is uploaded
-        if (isset($_FILES['choosefile']) && $_FILES['choosefile']['error'] === UPLOAD_ERR_OK) {
-            $filename = $_FILES["choosefile"]["name"];
-            $tempname = $_FILES["choosefile"]["tmp_name"];
-            $folder = "../imag/gallery".$filename;
-
-            // Move the uploaded file to the specified folder
-            if (move_uploaded_file($tempname, $folder)) {
-                // File upload successful, now insert post data into the database
-             $sql = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere , doctor_Id ) VALUES ('$filename', '$writeOverview', '$writeHere' , '$id')";
-                if (mysqli_query($conn, $sql)) {
-                    echo $success_message = "
-                    <div class='go_lastPost'>
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if(isset($_POST['submit'])){
+            $writeOverview = $_POST['writeOverview'];
+            $writeHere = $_POST['writeHere'];
+            $id = $_POST['doctor_id'];
+            $image = $_FILES['image'];
+            $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
+            $image_name = $_FILES['image']['name'];
+            $image_up = "image/".$image_name; // it's folder upload inside the image
+        
+            // insert data to database
+            $insert = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere , doctor_Id ) VALUES ('$image_up', '$writeOverview', '$writeHere' , '$id')";
+            mysqli_query($conn , $insert);
+            // Make sure the files are uploaded to folder image 
+            if(move_uploaded_file($image_location , 'image/'.$image_name)){
+                echo $success_message = "
+                <div class='go_lastPost'>
                     <h3>New post created successfully</h3>
                     <p> go to page <a href='./lastPostPage.php'>last post</a></p>
-                    </div>";
-                    } else {
-                        echo $error_message = "Error creating new post: " . mysqli_error($conn);
-                    }
-            } else {
-                echo $error_message = "Failed to upload image.";
+                </div>";
+            }else{
+                echo $error_message = "No file uploaded it's the error.";
             }
-        } else {
-            echo $error_message = "No file uploaded.";
         }
     }
-}
 ?>
-    <div class="container text-center">
+      <div class="container text-center">
         <div class="col-sm-12">
             <h3 class="p-3 bg-primary text-white">
             Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
@@ -131,23 +122,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <tr class="text-center">
                         <td scope="col">patient name</td>
                         <td scope="col">patient email</td>
+                        <td scope="col">price</td>
                         <td scope="col">reservation date</td>
-                        <td scope="col">payment</td>
                         <td scope="col">cancel reservation</td>
                     </tr>
                 </thead>
                 <tbody>
-                        <tr class="text-center">
-                            <td scope="row">amr kamal</td>
-                            <td class="text-center">amrkamal191@gmail.com</td>
-                            <td class="text-center">friday from 10am to 4pm</td>
-                            <td class="text-center">success online</td>
-                            <td class="text-center">
-                                <a href="#" class="btn btn-info">ok</a>
-                                <a href="#" class="btn btn-danger delete" data-field="city_id" data_id="<?php echo $row['city_id'];?>" data-table="city">Delete</a>
+                    <?php
+                        $doctor_id = $_SESSION['doctorId'];
+                        $query = "SELECT * FROM reservation WHERE reservation_doctor_id = '$doctor_id' ";
+                        $result = mysqli_query($conn, $query);
+                        $row = mysqli_fetch_array($result);
+                        $patient_id = $row['reservation_patient_id'];
+                        $queryGetPatient = "SELECT * FROM patient WHERE PatientId = '$patient_id' ";
+                        $resultGetPatient = mysqli_query($conn, $queryGetPatient);
+
+                        while($rowGetPatient = mysqli_fetch_array($resultGetPatient)){
+                            echo "
+                            <tr class='text-center'>
+                            <td scope='row'>$rowGetPatient[patient_name]</td>
+                            <td class='text-center'>$rowGetPatient[patient_email]</td>
+                            <td class='text-center'>$row[reservation_price]</td>
+                            <td class='text-center'>$row[reservation_doctor_date]</td>
+                            <td class='text-center'>
+                                <a href='#' class='btn btn-info'>ok</a>
+                                <a href='#' class='btn btn-danger delete' data-field='city_id' data_id='$row[reservation_id]' data-table='city'>Delete</a>
                             </td>
                         </tr>
-                </tbody> 
+                            ";
+                        }
+                    ?>
+                    </tbody> 
 
             </table>
         </div>
@@ -157,8 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h3>Create new post</h3>
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
-                <label for="AboutLecture">Choose Image</label>
-                <input type="file" name="choosefile" value="" />
+                  <input type="file" id="file" name="image" style="display: none;">
+                  <label for="file" style="cursor: pointer;">Choose Image Post</label>
                 </div>
                 <div class="input-group">
                     <label for="AboutLecture">Writing an overview of the post</label>

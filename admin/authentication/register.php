@@ -5,6 +5,9 @@
     <title>Registration</title>
     <link rel="stylesheet" href="../assets/css/register.css">
     <style>
+    .register{
+    height: 590px;
+    }
     .Alink{
         width: 100%;
         padding: 10px;
@@ -73,8 +76,8 @@
         }
     } else {
 ?>
-    <div class="register-container text-center">
-   <h2 class="text">Register page</h2>
+    <div class="register text-center">
+    <h2 class="text">Register page</h2>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         <div class="input-group">
             <label for="username">User name</label>
