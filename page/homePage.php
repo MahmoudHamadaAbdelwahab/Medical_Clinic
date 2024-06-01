@@ -33,7 +33,14 @@
                     color: black
                 };
                 /* end slider */
-       
+                /* start department */
+                .department{
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+               /* end department */
             </style>
         </head>
         <body>
@@ -57,9 +64,26 @@
                     </div>
                 </div>
             </div>
-            <div class="container text-center" style="height:100%">
+            <div class="container text-center">
                     <!-- start department page -->
-                    <?php include('../doctor/department.php')?>
+                    <div>
+                        <h1>Department</h1>
+                        <div class="allDoctors">
+                            <?php
+                                require_once BL.'functions/db.php';
+                                require_once BL.'functions/messages.php';
+                                require_once BL.'functions/valid.php';
+                                $query = "SELECT * FROM department";
+                                $result = mysqli_query($conn , $query);
+                                while($row = mysqli_fetch_array($result)){
+                                    echo "<div class='justify-content-center col-sm-2 col-md-2 col-lg-2'>";
+                                    echo "<img src='../admin/dashboard/$row[depart_image]') style='width:70px'/>";
+                                    echo"<h5><a href='doctors.php?department_id=" . $row['depart_id'] . "' style='text-decoration:none;'>" . $row['depart_name'] . "</a> </h5>";
+                                    echo "</div>";
+                                }
+                            ?>
+                        </div>
+                    </div>
                     <!-- end department page -->
 
                     <!-- start show all doctor -->

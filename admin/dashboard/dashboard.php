@@ -11,6 +11,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="dashboard.css">
+    <style>
+    label[for="department"]{
+        background-color: #9ea4a4;
+        width: 40%;
+        color: black;
+        cursor : pointer;
+    }
+    </style>
 </head>
 <body>
     <center>
@@ -19,16 +27,41 @@
                 <h1>Dashboard Admin</h1>
             </div>
             <!-- this code special upload image enctype="multipart/form-data" -->
+            <!-- add new department  -->
+            <form action="insert.php" method="post" enctype="multipart/form-data">
+                <img src="departMent.png" alt="logo" width="100px" style="margin: 10px;">
+                <br>
+                <input type="text" id="depart_name" name="depart_name" placeholder="Writing department name">
+                <br>
+                <input type="file" id="image" name="imageDepart" required style="display: none;">
+                <label for="image">Choose Image Department</label>
+                <button name="uploadDepart">Upload Department New</button>
+            </form>
+
+            <!-- add new doctor -->
             <form action="insert.php" method="post" enctype="multipart/form-data">
                 <img src="doctorLogo.png" alt="logo" width="100px" height="100px" style="margin: 10px;">
                 <br>
                 <input type="text" id="name" name="name" placeholder="Writing  doctor's name">
                 <br>
-                <input type="text" id="password" name="password" placeholder="Writing  doctor's password">
+                <input type="password" id="password" name="password" placeholder="Writing  doctor's password">
                 <br>
                 <input type="text" id="role" name="role" value="doctor" style="display: none;">
                 <!-- <br> -->
-                <input type="text" id="specialty" name="specialty" placeholder="Writing doctor's specialty">
+                <!-- start select show the department-->
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                <?php
+                $sql = "SELECT depart_id, depart_name FROM department";
+                $result = $conn->query($sql);
+                echo $row = $result->fetch_assoc();
+                while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row['depart_id'] . "'>" . $row['depart_name'] . "</option>";
+                }
+                ?>
+                </select>
+                <!-- end select -->
+                <!-- <input type="text" id="specialty" name="specialty" placeholder="Writing doctor's specialty"> -->
                 <br>
                 <input type="text" id="Phone" name="Phone" placeholder="Writing doctor's phone">
                 <br>
@@ -36,28 +69,14 @@
                 <br>
                 <input type="text" id="price" name="price" placeholder="Writing doctor's booking price">
                 <br>
-                <input type="file" id="file" name="image" style="display: none;">
+                <input type="file" id="file" name="image" required style="display: none;">
                 <label for="file">Choose Image Doctor</label>
                 <button name="upload">Upload Doctor New</button>
                 <br>
                 <a class="goToPage" href="showAllDoctors.php">Show All Doctors</a>
-                <br>
+                <a class="goToPage" href="showAllDepartment.php">Show All Department</a>
                 <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
             </form>
-
-            <!-- add new department  -->
-            <!-- <form action="insert.php" method="post" enctype="multipart/form-data">
-                <img src="departMent.png" alt="logo" width="100px" style="margin: 10px;">
-                <br>
-                <input type="text" id="depart_name" name="depart_name" placeholder="Writing department name">
-                <br>
-                <label for="file">Choose Image Department</label>
-                <button name="uploadDepart">Upload Department New</button>
-                <br>
-                <a class="goToPage" href="showAllDepartment.php">Show All Department</a>
-                <br>
-                <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
-            </form> -->
         </div>
     </center>
 </body>
