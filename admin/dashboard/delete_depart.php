@@ -5,13 +5,13 @@
     require_once BL.'functions/valid.php';
     require_once BLA.'inc/nav.php';
     // write inside get the database 
-    $id = $_GET['id'];
-    mysqli_query($conn , "DELETE FROM doctor WHERE doctorId = $id");
+    $id = $_GET['delete_id'];
+    mysqli_query($conn , "DELETE FROM department WHERE depart_id = $id");
     echo'
     <script>
-        alert("The doctor has been successfully deleted")
+        alert("The partition has been successfully deleted")
     </script>
     '; 
-    header('location:showAllDoctors.php');
+    header('location:showAllDepart.php');
 ?>
 <?php require_once BLA.'inc/footer.php'; ?>

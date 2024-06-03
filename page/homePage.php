@@ -98,13 +98,19 @@
                                 $query = "SELECT * FROM doctor";
                                 $result = mysqli_query($conn , $query);
                                 while($row = mysqli_fetch_array($result)){
+                                    // show the department name
+                                    $depart_Id = $row['depart_id'];
+                                    $query_depart = "SELECT * FROM department WHERE depart_id = '$depart_Id'";
+                                    $result_depart = mysqli_query($conn , $query_depart);
+                                    $row_depart = mysqli_fetch_array($result_depart);
+
                                     echo "
                                     <div>
                                         <div class='card' style='width: 18rem;'>
                                             <img src='../admin/dashboard/$row[doctorImage]' class='card-img-top'>
                                             <div class='card-body'>
                                                 <h5 class='card-title'>$row[doctorName]</h5>
-                                                <p class='card-text'>$row[doctorIsSpecialty]</p>
+                                                <p class='card-text'>$row_depart[depart_name]</p>
                                                 <p class='card-text'>$row[doctorPhone]</p>
                                                 <p class='card-text'>$row[doctorDate]</p>
                                                 <p class='card-text'>$row[doctor_booking_price]</p>

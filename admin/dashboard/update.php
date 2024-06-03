@@ -28,8 +28,19 @@
                 <br>
                 <input type="text" name="name" value='<?php echo $data['doctorName']?>'>
                 <br>
-                <input type="text"  name="specialty" value='<?php echo $data['doctorIsSpecialty']?>'>
-                <br>
+                <!-- start select show the department-->
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <?php
+                    $sql = "SELECT depart_id, depart_name FROM department";
+                    $result = $conn->query($sql);
+                    echo $row = $result->fetch_assoc();
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<option value='" . $row['depart_id'] . "'>" . $row['depart_name'] . "</option>";
+                    }
+                    ?>
+                </select>
+                <!-- end select -->
                 <br>
                 <input type="text"  name="Phone" value='<?php echo $data['doctorPhone']?>'>
                 <br>

@@ -116,44 +116,52 @@
             <h3 class="p-3 bg-primary text-white">
             Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
             </h3>
-
-            <table class="table table-dark table-bordered">
-                <thead>
-                    <tr class="text-center">
-                        <td scope="col">patient name</td>
-                        <td scope="col">patient email</td>
-                        <td scope="col">price</td>
-                        <td scope="col">reservation date</td>
-                        <td scope="col">cancel reservation</td>
-                    </tr>
-                </thead>
-                <tbody>
                     <?php
                         $doctor_id = $_SESSION['doctorId'];
                         $query = "SELECT * FROM reservation WHERE reservation_doctor_id = '$doctor_id' ";
                         $result = mysqli_query($conn, $query);
                         $row = mysqli_fetch_array($result);
-                        $patient_id = $row['reservation_patient_id'];
-                        $queryGetPatient = "SELECT * FROM patient WHERE PatientId = '$patient_id' ";
-                        $resultGetPatient = mysqli_query($conn, $queryGetPatient);
+                        if($row = mysqli_fetch_array($result) > 1){
+                            echo '
+                            <table class="table table-dark table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <td scope="col">patient name</td>
+                                    <td scope="col">patient email</td>
+                                    <td scope="col">price</td>
+                                    <td scope="col">reservation date</td>
+                                    <td scope="col">cancel reservation</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            ';
 
-                        while($rowGetPatient = mysqli_fetch_array($resultGetPatient)){
+                            $patient_id = $row['reservation_patient_id'];
+                            $queryGetPatient = "SELECT * FROM patient WHERE PatientId = '$patient_id' ";
+                            $resultGetPatient = mysqli_query($conn, $queryGetPatient);
+    
+                            while($rowGetPatient = mysqli_fetch_array($resultGetPatient)){
+                                echo "
+                                <tr class='text-center'>
+                                <td scope='row'>$rowGetPatient[patient_name]</td>
+                                <td class='text-center'>$rowGetPatient[patient_email]</td>
+                                <td class='text-center'>$row[reservation_price]</td>
+                                <td class='text-center'>$row[reservation_doctor_date]</td>
+                                <td class='text-center'>
+                                    <a href='#' class='btn btn-info'>ok</a>
+                                    <a href='#' class='btn btn-danger delete' data-field='city_id' data_id='$row[reservation_id]' data-table='city'>Delete</a>
+                                </td>
+                            </tr>
+                                ";
+                            }
+                        }else{
                             echo "
-                            <tr class='text-center'>
-                            <td scope='row'>$rowGetPatient[patient_name]</td>
-                            <td class='text-center'>$rowGetPatient[patient_email]</td>
-                            <td class='text-center'>$row[reservation_price]</td>
-                            <td class='text-center'>$row[reservation_doctor_date]</td>
-                            <td class='text-center'>
-                                <a href='#' class='btn btn-info'>ok</a>
-                                <a href='#' class='btn btn-danger delete' data-field='city_id' data_id='$row[reservation_id]' data-table='city'>Delete</a>
-                            </td>
-                        </tr>
+                                <h5>There are no reservations for you yet</h5>
                             ";
                         }
+            
                     ?>
                     </tbody> 
-
             </table>
         </div>
 
@@ -163,7 +171,7 @@
             <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" enctype="multipart/form-data">
                 <div class="input-group">
                   <input type="file" id="file" name="image" style="display: none;">
-                  <label for="file" style="cursor: pointer;">Choose Image Post</label>
+                  <label for="file" style="cursor: pointer; color:#0d6efd; font-weight:bold;">Choose Image Post</label>
                 </div>
                 <div class="input-group">
                     <label for="AboutLecture">Writing an overview of the post</label>

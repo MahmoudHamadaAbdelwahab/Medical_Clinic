@@ -47,7 +47,6 @@
                 <input type="password" id="password" name="password" placeholder="Writing  doctor's password">
                 <br>
                 <input type="text" id="role" name="role" value="doctor" style="display: none;">
-                <!-- <br> -->
                 <!-- start select show the department-->
                 <label for="department">Department:</label>
                 <select id="department" name="department" required>
@@ -61,7 +60,6 @@
                 ?>
                 </select>
                 <!-- end select -->
-                <!-- <input type="text" id="specialty" name="specialty" placeholder="Writing doctor's specialty"> -->
                 <br>
                 <input type="text" id="Phone" name="Phone" placeholder="Writing doctor's phone">
                 <br>
@@ -74,7 +72,7 @@
                 <button name="upload">Upload Doctor New</button>
                 <br>
                 <a class="goToPage" href="showAllDoctors.php">Show All Doctors</a>
-                <a class="goToPage" href="showAllDepartment.php">Show All Department</a>
+                <a class="goToPage" href="showAllDepart.php">Show All Department</a>
                 <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
             </form>
         </div>

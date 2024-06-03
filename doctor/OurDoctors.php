@@ -6,7 +6,6 @@ require_once BL.'functions/db.php';
 
 if(isset($_POST['Booking'])){
     $name = $_POST['name'];
-    $specialty = $_POST['specialty'];
     $phone = $_POST['phone'];
     $date = $_POST['date'];
     $price = $_POST['price'];
@@ -69,20 +68,24 @@ if(isset($_POST['Booking'])){
                     }
                     $query = "SELECT * FROM doctor";
                     $result = mysqli_query($conn, $query);
-
                     while($row = mysqli_fetch_array($result)){
+                        // show the department name
+                        $depart_Id = $row['depart_id'];
+                        $query_depart = "SELECT * FROM department WHERE depart_id = '$depart_Id'";
+                        $result_depart = mysqli_query($conn , $query_depart);
+                        $row_depart = mysqli_fetch_array($result_depart);
+
                         echo "
                         <div class='card' style='width: 18rem;'>
                             <img src='../admin/dashboard/$row[doctorImage]' class='card-img-top'>
                             <div class='card-body'>
                                 <h5 class='card-title'>$row[doctorName]</h5>
-                                <p class='card-text'>$row[doctorIsSpecialty]</p>
+                                <p class='card-text'>$row_depart[depart_name]</p>
                                 <p class='card-text'>$row[doctorPhone]</p>
                                 <p class='card-text'>$row[doctorDate]</p>
                                 <p class='card-text'>$row[doctor_booking_price]</p>
                                 <form action='' method='POST'>
                                     <input type='hidden' name='name' value='$row[doctorName]'>
-                                    <input type='hidden' name='specialty' value='$row[doctorIsSpecialty]'>
                                     <input type='hidden' name='phone' value='$row[doctorPhone]'>
                                     <input type='hidden' name='date' value='$row[doctorDate]'>
                                     <input type='hidden' name='price' value='$row[doctor_booking_price]'>
