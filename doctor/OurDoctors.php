@@ -5,6 +5,7 @@ require_once BL.'functions/valid.php';
 require_once BL.'functions/db.php';
 
 if(isset($_POST['Booking'])){
+    if(isset($_SESSION['PatientId']) && isset($_SESSION['patient_email'])) {
     $name = $_POST['name'];
     $phone = $_POST['phone'];
     $date = $_POST['date'];
@@ -26,6 +27,14 @@ if(isset($_POST['Booking'])){
               </div>";
     }
     $stmt->close();
+    }else{
+        echo'
+        <div class="d-flex justify-content-center gap-5">
+            <h5>You must be logged in to book a doctor</h5>
+            <a href="../admin/authentication/login.php" style="text-decoration: none;">got to login</a>
+        </div>
+        ';
+    }
 }
 ?>
 
@@ -38,6 +47,7 @@ if(isset($_POST['Booking'])){
     <style>
         .patientEmail {
             display: none;
+          
         }
     </style>
 </head>
@@ -99,6 +109,7 @@ if(isset($_POST['Booking'])){
                         ";
                     }
                     ?>
+
                 </div>
             </div>
         </div>
@@ -108,4 +119,4 @@ if(isset($_POST['Booking'])){
 </body>
 </html>
 
-<?php require_once BLA.'inc/footer.php'; ?>
+<?php require_once BLA.'inc/footer.php'; ?> 

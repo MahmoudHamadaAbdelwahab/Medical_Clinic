@@ -27,7 +27,7 @@
                     alert("it is update successfully")
                 </script>
             ';
-            header('location:showAllDoctors.php');
+            header('location:showAllDepart.php');
         }else{
             echo'
             <script>

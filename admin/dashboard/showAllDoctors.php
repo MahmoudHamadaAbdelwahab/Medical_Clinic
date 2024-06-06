@@ -63,3 +63,5 @@
     </div>
 </body>
 </html>
+<?php require_once BLA.'inc/footer.php'; ?>
+

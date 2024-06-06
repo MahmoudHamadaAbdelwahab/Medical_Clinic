@@ -7,7 +7,6 @@
     .LiveDoc{
         background-image: url('../../imag/gallery/about-bg.png');
         background-size: cover;
-        height: 100%;
         cursor:pointer;
     }
     .LiveDoc h3{
@@ -17,7 +16,6 @@
         display: flex;
         flex-direction: column;
     }
-
     .LiveDoc .LiveDocCart h5{
         font-size: 16px;
     }
@@ -34,11 +32,23 @@
                 <div class='d-flex justify-content-around gap-2 flex-wrap col-sm-9 col-md-8 col-lg-9'>
                     <div class='LiveDocCart col-sm-3 col-md-3 col-lg-3'>
                         <h3>Departments</h3>
-                        <div>
+                        <!-- <div>
                             <h5>Eye care</h5>
                             <h5>Cardiac are</h5>
                             <h5>Heart care</h5>
-                        </div>
+                        </div> -->
+                        <?php
+                            require_once BL.'functions/db.php';
+                            require_once BL.'functions/messages.php';
+                            require_once BL.'functions/valid.php';
+                            $query = "SELECT * FROM department";
+                            $result = mysqli_query($conn , $query);
+                            while($row = mysqli_fetch_array($result)){
+                                echo "<div class='justify-content-center col-sm-2 col-md-2 col-lg-2'>";
+                                    echo"<h5><a href='../../page/doctors.php?department_id=" . $row['depart_id'] . "' style='text-decoration:none;'>" . $row['depart_name'] . "</a> </h5>";
+                                echo "</div>";
+                            }
+                        ?>
                     </div>
                     <div class='LiveDocCart col-sm-3 col-md-3 col-lg-3'>
                         <h3>Membership</h3>

@@ -3,7 +3,6 @@
     require_once BL.'functions/valid.php';
     require_once BL.'functions/db.php';
     $result = mysqli_query($conn, "SELECT * FROM lastpost");
-    // $result = mysqli_query($conn, "SELECT * FROM doctor WHERE doctorId = ");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,17 +18,33 @@
                     <div class='d-flex gap-4 flex-wrap mt-2 my-2'>
                         <?php
                             while ($row = mysqli_fetch_array($result)){
-                         
                                 $image_path = $row['lastPost_Image'];
                                 $About = mb_strimwidth($row['lastPost_About'], 0, 25 , "...");
                                 $writeHere = mb_strimwidth($row['lastPost_writeHere'], 0, 70, "...");
+                                $lastPost_id = $row['lastPost_Id'];
+                                // Call the doctor to have his name appear
+                                $doctor_id = $row['doctor_Id'];
+                                $query_doc = "SELECT * FROM doctor WHERE doctorId = '$doctor_id'";
+                                $result_doc = mysqli_query($conn,$query_doc);
+                                $row_doc = mysqli_fetch_array($result_doc);
+
+                                // Show the department of the doctor
+                                $depart_id = $row_doc['depart_id'];
+                                $query_depart = "SELECT * FROM department WHERE depart_id = '$depart_id'";
+                                $result_depart = mysqli_query($conn,$query_depart);
+                                $row_depart = mysqli_fetch_array($result_depart);
+
                                 echo "
-                                <div class='card text-center' style='width: 18rem;'>
-                                        <img src='$image_path' alt='Image' width='100%' height='200'><br>
+                                <div class='card text-center' style='width: 20rem;'>
+                                    <img src='$image_path' alt='Image' width='100%' height='200'><br>
+                                    <div class='d-flex justify-content-around'>
+                                        <p class='card-title'> $row_doc[doctorName]</p>    
+                                        <p class='card-title'> $row_depart[depart_name]</p>  
+                                    </div>
                                     <div class='text'>
                                         <h5 class='card-title'>$About</h5>    
                                         <p class='card-text'>$writeHere</p>    
-                                        <a href='#' class='btn btn-primary'>Read more</a>
+                                        <a href='readMore.php? Read_id=$lastPost_id' class='btn btn-primary'>Read more</a>
                                     </div>
                                 </div>
                                 ";

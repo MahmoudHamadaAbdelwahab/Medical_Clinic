@@ -50,6 +50,7 @@
                 <!-- start select show the department-->
                 <label for="department">Department:</label>
                 <select id="department" name="department" required>
+                <!-- <option selected="selected">Select department</option> -->
                 <?php
                 $sql = "SELECT depart_id, depart_name FROM department";
                 $result = $conn->query($sql);
