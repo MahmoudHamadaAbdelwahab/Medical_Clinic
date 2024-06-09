@@ -74,7 +74,9 @@
                 <br>
                 <a class="goToPage" href="showAllDoctors.php">Show All Doctors</a>
                 <a class="goToPage" href="showAllDepart.php">Show All Department</a>
-                <a class="goToPage" href="../../page/homePage.php">Go To HomePage</a>
+                <br>
+                <a class="goToPage" href="showAllOpinion.php">Show All Opinions</a>
+                <a class="goToPage" href="../../page/homePage.php">HomePage</a>
             </form>
         </div>
     </center>

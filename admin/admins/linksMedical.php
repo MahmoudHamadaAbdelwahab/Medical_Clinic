@@ -38,6 +38,7 @@
                             <h5>Heart care</h5>
                         </div> -->
                         <?php
+                            require_once('../../config.php');
                             require_once BL.'functions/db.php';
                             require_once BL.'functions/messages.php';
                             require_once BL.'functions/valid.php';
@@ -63,7 +64,7 @@
                         <div>
                             <h5>About Us</h5>
                             <h5>Contact US</h5>
-                            <h5>Get Update</h5>
+                            <h5><a href="../admins/contactUs.php" style="text-decoration: none;">Get in Touch</a></h5>
                         </div>
                     </div>
                 </div>

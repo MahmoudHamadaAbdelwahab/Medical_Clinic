@@ -2,9 +2,6 @@
     require_once('../../config.php');
     require_once BLA.'inc/nav.php';
 ?>
-    <!-- <link rel="stylesheet" href="../admin/assets/css/about.css"> -->
-    <!-- Your HTML content goes here -->
-
     <!DOCTYPE html>
     <html lang="en">
     <head>

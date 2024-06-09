@@ -9,27 +9,29 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../admin/assets/css/homePage.css">
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-beta3/css/bootstrap.min.css" rel="stylesheet">
         <style>
             .container{
                 text-align: center;
             }
             /* start slider */
-            .slider{
+            .slider_Home{
                 background-image: url('../imag/gallery/hero-bg.png');
                 background-size: cover;
                 height: 100%;
                 text-align: center;
             }
 
-             .slider .slider-title{
+             .slider_Home .slider-title{
                 color: #0d6efd;
                 font-weight: bold;
                 font-size: 30px;
             };
-            .slider .slider-text{
+            .slider_Home .slider-text{
                 font-size: 16px;
             }
-            .slider .cart .click a{
+            .slider_Home .cart .click a{
                 text-decoration: none;
                 font-size: 20px;
                 font-weight:bold; 
@@ -58,11 +60,36 @@
             height: 200px;
             padding: 10px;
             }
+            .name_depart{
+                text-decoration: none;
+            }
             /* end all doctor */
+
+            /* start Customer opinion  */
+            .star {
+            font-size: 2em;
+            cursor: pointer;
+            color: gray;
+            }
+            .star.selected {
+                color: gold;
+            }
+            .slider_opinion{
+                width: 80%;
+                margin: 20px auto;
+            }
+            .slide {
+                padding: 20px;
+                text-align: center;
+            }
+            .stars {
+                font-size: 1.5em;
+            }
+            /* end Customer opinion  */
         </style>
     </head>
     <body>
-        <div class="slider text-center">
+        <div class="slider_Home text-center">
             <div class="container">
                 <div class="row d-flex justify-content-center align-items-center text-center">
                     <div class="col-sm-5 col-lg-6">
@@ -93,10 +120,12 @@
                             $query = "SELECT * FROM department";
                             $result = mysqli_query($conn , $query);
                             while($row = mysqli_fetch_array($result)){
-                                echo "<div class='justify-content-center col-sm-2 col-md-2 col-lg-2'>";
-                                echo "<img src='../admin/dashboard/$row[depart_image]') style='width:70px'/>";
-                                echo"<h5><a href='doctors.php?department_id=" . $row['depart_id'] . "' style='text-decoration:none;'>" . $row['depart_name'] . "</a> </h5>";
-                                echo "</div>";
+                                echo "<div class='justify-content-center col-sm-2 col-md-2 col-lg-2'>
+                                    <a class='name_depart' href='doctors.php?department_id=$row[depart_id]'>
+                                        <img src='../admin/dashboard/$row[depart_image]' style='width:70px'/>
+                                        <h5>$row[depart_name]</h5>
+                                    </a>
+                                </div>";
                             }
                         ?>
                     </div>
@@ -189,13 +218,9 @@
                 </div>
                 <!-- ent last post -->
 
-                <!-- start links Medical page -->
-                <!-- <h1>Links</h1> -->
-                <?php //include('../admin/admins/linksMedical.php')?>
-                <!-- end links Medical page -->
-
                 <!-- start Customer opinion -->
-                <h1>Customer opinion</h1>  
+                <h1>Customer Opinion</h1>
+                  <?php include('customerOpinion.php')?>   
                 <!--  end Customer opinion   -->
 
                 <!-- start map  -->
@@ -203,8 +228,66 @@
                 <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13813.242694188517!2d31.340407351171343!3d30.05662807107523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e5d94c66301%3A0xddddf100de42206c!2z2YXYr9mK2YbZhyDZhti12LHYjCDYp9mE2YXZhti32YLYqSDYp9mE2KPZiNmE2YnYjCDZhdiv2YrZhtipINmG2LXYsdiMINmF2K3Yp9mB2LjYqSDYp9mE2YLYp9mH2LHYqeKArCA0NDUwMTEz!5e0!3m2!1sar!2seg!4v1717591853676!5m2!1sar!2seg" width="100%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
                 <!-- end map  -->
         </div>
+
+        <!-- start Customer opinion -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const stars = document.querySelectorAll('.star');
+                const ratingInput = document.getElementById('rating-input');
+             
+                stars.forEach(star => {
+                    star.addEventListener('click', rateStar);
+                });
+
+                function rateStar(event) {
+                    const selectedStar = event.target;
+                    const rating = selectedStar.getAttribute('data-value');
+                    
+                    stars.forEach(star => {
+                        star.classList.remove('selected');
+                    });
+
+                    for (let i = 0; i < rating; i++) {
+                        stars[i].classList.add('selected');
+                    }
+
+                    ratingInput.value = rating;
+                }
+
+                // Fetch and display opinions
+                fetch('get_opinions.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const slider = $('#opinions-slider');
+                        data.forEach(opinion => {
+                            const stars = '★'.repeat(opinion.rating) + '☆'.repeat(5 - opinion.rating);
+                            slider.append(`
+                                <div class="slide">
+                                    <h3>${opinion.name}</h3>
+                                    <p>${opinion.phone}</p>
+                                    <p>${opinion.address}</p>
+                                    <p>${opinion.message}</p>
+                                    <div class="stars">${stars}</div>
+                                </div>
+                            `);
+                        });
+
+                        // Initialize Slick Slider
+                        slider.slick({
+                            dots: true,
+                            infinite: true,
+                            speed: 300,
+                            slidesToShow: 1,
+                            adaptiveHeight: true
+                        });
+                    });
+            });
+        </script>
+        <!--  end Customer opinion   -->
     </body>
 </html>
-
 <!-- footer -->
 <?php require_once BLA.'inc/footer.php';?>

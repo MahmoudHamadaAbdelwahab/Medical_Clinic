@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="container">
-            <h1>Doctors </h1>
+            <h1>Doctors</h1>
             <div class="doctors">
                 <?php
                 require_once('../config.php');
