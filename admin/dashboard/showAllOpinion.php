@@ -1,62 +1,99 @@
 <?php
-    require_once('../../config.php');
-    require_once BL.'functions/db.php';
-    require_once BL.'functions/messages.php';
-    require_once BL.'functions/valid.php';
-    require_once BLA.'inc/nav.php';
+require_once('../../config.php');
+require_once BL.'functions/db.php';
+require_once BL.'functions/messages.php';
+require_once BL.'functions/valid.php';
+require_once BLA.'inc/nav.php';
+
+// Fetch opinions from the database
+$sql = "SELECT id, name, phone, address, message, rating FROM opinion";
+$result = mysqli_query($conn, $sql);
+
+$opinions = [];
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $opinions[] = $row;
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../assets/css/appointment.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
     <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
+        .star {
+            font-size: 2em;
+            cursor: pointer;
+            color: gray;
         }
-        .card{
-            float: right;
-            margin: 15px;
+        .star.selected {
+            color: gold;
         }
-        .card img{
-            width: 100%;
-            height: 200px;
-            padding: 10px;
+        .slider {
+            width: 80%;
+            margin: 20px auto;
+        }
+        .slide {
+            padding: 20px;
+            text-align: center;
+        }
+        .stars {
+            font-size: 1.5em;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: darkred;
         }
     </style>
 </head>
 <body>
-    <?php
-        echo "<h2 class='text-center'>Show All Opinions</h2>";
-        $query = "SELECT * FROM opinion";
-        $result = mysqli_query($conn , $query);
-     ?>   
-    <div class="container">
-        <?php
-            while($row = mysqli_fetch_array($result)){
-                $name = htmlspecialchars($row['name']);
-                $address = htmlspecialchars($row['address']);
-                $message = htmlspecialchars($row['message']);
-                echo "
-                <div class='card' style='width: 18rem; height: auto;'>
-                        <div class='d-flex justify-content-around'>
-                            <h6 class='card-title'>$name</h6>    
-                            <h6 class='card-title'>$address</h6>  
-                        </div>
-                        <div class='card-body'>
-                            <p class='card-text'>$message</p>
-                            <a href='deleteOpinion.php? id=$row[id]' class='btn btn-danger'>Delete</a>
-                        </div>
-                    </div>
-                ";
-            }
-        ?>
-    </div>
+<div class="slider" id="opinions-slider">
+    <?php foreach ($opinions as $opinion): ?>
+        <div class="slide">
+            <h3><?php echo htmlspecialchars($opinion['name']); ?></h3>
+            <p><?php echo htmlspecialchars($opinion['phone']); ?></p>
+            <p><?php echo htmlspecialchars($opinion['address']); ?></p>
+            <p><?php echo htmlspecialchars($opinion['message']); ?></p>
+            <div class="stars">
+                <?php
+                for ($i = 0; $i < 5; $i++) {
+                    echo $i < $opinion['rating'] ? '★' : '☆';
+                }
+                ?>
+            </div>
+            <a href="deleteOpinion.php?id=<?php echo $opinion['id']; ?>" class='btn btn-danger'>Delete</a>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#opinions-slider').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+    });
+</script>
 </body>
 </html>
-<?php require_once BLA.'inc/footer.php'; ?>
 
+<?php require_once BLA.'inc/footer.php'; ?>
