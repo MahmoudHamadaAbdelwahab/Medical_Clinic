@@ -33,14 +33,16 @@ if (mysqli_num_rows($result) > 0) {
             color: gold;
         }
         .slider {
-            width: 80%;
+            width: 400px;
             margin: 20px auto;
         }
         .slide {
-            padding: 20px;
-            text-align: center;
+            border: 1px solid black;
+            padding: 10px;
+            background-color: #d1d1d1;
         }
         .stars {
+            margin-block: -7px;
             font-size: 1.5em;
         }
     </style>
@@ -49,17 +51,21 @@ if (mysqli_num_rows($result) > 0) {
 <div class="slider" id="opinions-slider">
     <?php foreach ($opinions as $opinion): ?>
         <div class="slide">
-            <h3><?php echo htmlspecialchars($opinion['name']); ?></h3>
-            <p><?php echo htmlspecialchars($opinion['phone']); ?></p>
-            <p><?php echo htmlspecialchars($opinion['address']); ?></p>
-            <p><?php echo htmlspecialchars($opinion['message']); ?></p>
-            <div class="stars">
-                <?php
-                for ($i = 0; $i < 5; $i++) {
-                    echo $i < $opinion['rating'] ? '★' : '☆';
-                }
-                ?>
+            <div class="d-flex justify-content-center gap-5">
+                <h6><?php echo htmlspecialchars($opinion['name']); ?></h6>
+                <div class="stars mb-2">
+                    <?php
+                    for ($i = 0; $i < 5; $i++) {
+                        echo $i < $opinion['rating'] ? '★' : '☆';
+                    }
+                    ?>
+                </div>
             </div>
+            <div class="d-flex justify-content-center gap-5">
+                <p><?php echo htmlspecialchars($opinion['address']); ?></p>
+                <p><?php echo htmlspecialchars($opinion['phone']); ?></p>
+            </div>
+                <p><?php echo htmlspecialchars($opinion['message']); ?></p>
         </div>
     <?php endforeach; ?>
 </div>

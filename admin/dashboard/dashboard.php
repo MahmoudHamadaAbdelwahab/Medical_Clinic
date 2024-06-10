@@ -64,7 +64,7 @@
                 <br>
                 <input type="text" id="Phone" name="Phone" placeholder="Writing doctor's phone">
                 <br>
-                <input type="date" id="date" name="date" placeholder="Writing doctor's appointments">
+                <input type="date" id="date" name="date">
                 <br>
                 <input type="text" id="price" name="price" placeholder="Writing doctor's booking price">
                 <br>

@@ -90,13 +90,15 @@
             $writeOverview = $_POST['writeOverview'];
             $writeHere = $_POST['writeHere'];
             $id = $_POST['doctor_id'];
+            $input_date=$_POST['date'];
+            $date=date("Y-m-d",strtotime($input_date));
             $image = $_FILES['image'];
             $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
             $image_name = $_FILES['image']['name'];
             $image_up = "image/".$image_name; // it's folder upload inside the image
         
             // insert data to database
-            $insert = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere , doctor_Id ) VALUES ('$image_up', '$writeOverview', '$writeHere' , '$id')";
+            $insert = "INSERT INTO lastpost (lastPost_Image, lastPost_About, lastPost_writeHere , doctor_Id  , lastPost_date) VALUES ('$image_up', '$writeOverview', '$writeHere' , '$id' , '$date')";
             mysqli_query($conn , $insert);
             // Make sure the files are uploaded to folder image 
             if(move_uploaded_file($image_location , 'image/'.$image_name)){
@@ -114,7 +116,7 @@
       <div class="container text-center">
         <div class="col-sm-12">
             <h3 class="p-3 bg-primary text-white">
-            Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
+                Welcome <?php echo $_SESSION['doctorName']; ?> , reservation
             </h3>
                     <?php
                         $doctor_id = $_SESSION['doctorId'];
@@ -159,7 +161,6 @@
                                 <h5>There are no reservations for you yet</h5>
                             ";
                         }
-            
                     ?>
                     </tbody> 
             </table>
@@ -180,6 +181,9 @@
                 <div class="input-group">
                     <label for="writeHere">Write here</label>
                     <input type="textarea" id="writeHere" name="writeHere">
+                </div>
+                <div class="input-group">
+                    <input type="date" name="date">
                 </div>
                 <div class="input-group">
                     <a href="posted_I_Created.php" style="text-decoration: none; color:#0d6efd; font-weight:bold;">Posts i created</a>

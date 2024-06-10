@@ -37,6 +37,7 @@
                         <div class='card-body'>
                             <h5 class='card-title'>$row[lastPost_About]</h5>
                             <p class='card-text'>$row[lastPost_writeHere]</p>
+                            <p class='card-text'>$row[lastPost_date]</p>
                             <a href='delete.php? id=$row[lastPost_Id]' class='btn btn-danger'>Delete</a>
                             <a href='update.php? id=$row[lastPost_Id]' class='btn btn-primary'>Edit</a>
                         </div>

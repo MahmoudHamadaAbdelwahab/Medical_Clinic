@@ -14,13 +14,15 @@
             $Id = $_POST['id'];
             $about = $_POST['about'];
             $writeHere = $_POST['writeHere'];
+            $update_date = $_POST['date'];
+            $date=date("Y-m-d",strtotime($update_date));
             $image = $_FILES['image'];
             $image_location = $_FILES['image']['tmp_name']; // it's image and extension 
             $image_name = $_FILES['image']['name'];
             $image_up = "image".$image_name; // it's folder upload inside the image
             
             // insert data to database
-            $update = "UPDATE lastpost SET lastPost_Image='$image_up' , lastPost_About='$about' , lastPost_writeHere='$writeHere' WHERE lastPost_Id=$Id";
+            $update = "UPDATE lastpost SET lastPost_Image='$image_up' , lastPost_About='$about' , lastPost_writeHere='$writeHere' , lastPost_date='$date' WHERE lastPost_Id=$Id";
             mysqli_query($conn , $update);
             // Make sure the files are uploaded to folder image 
             if(move_uploaded_file($image_location , 'image'.$image_name)){
@@ -104,6 +106,8 @@
                 <input type="text"  name="about" value='<?php echo $data['lastPost_About']?>'>
                 <br>
                 <input type="text"  name="writeHere" value='<?php echo $data['lastPost_writeHere']?>'>
+                <br>
+                <input type="date"  name="date" value='<?php echo $data['lastPost_date']?>'>
                 <br>
                 <input type="file" id="file" name="image" style="display: none;">
                 <label for="file">Upload Image Post</label>
