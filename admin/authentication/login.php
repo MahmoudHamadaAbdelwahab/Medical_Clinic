@@ -28,7 +28,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['patient_email'] = $user['patient_email'];
         $_SESSION['patient_role'] = $user['patient_role'];
         
-        $success_message = "<h3>Successfully logged in as patient.</h3>";
+        // $success_message = "<h3>Successfully logged in as patient.</h3>";
+        echo '
+        <div class="alert alert-info" role="alert">
+            Successfully logged in as patient
+        </div>        
+    ';
     } elseif (mysqli_num_rows($result2) == 1) {
         $user = mysqli_fetch_assoc($result2);
         
@@ -37,7 +42,12 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['doctorName'] = $user['doctorName'];
         $_SESSION['doctorRole'] = $user['doctorRole'];
         
-        $success_message = "<h3>Successfully logged in as doctor.</h3>";
+        // $success_message = "<h3>Successfully logged in as doctor.</h3>";
+        echo '
+            <div class="alert alert-info" role="alert">
+                Successfully logged in as doctor
+            </div>        
+        ';
     } else {
         $error_message = "<h3>Incorrect Username or password.</h3>";
         echo "<div class='form_error'>$error_message<br/></div>";
